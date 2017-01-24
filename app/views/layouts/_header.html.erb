@@ -6,17 +6,16 @@
       <span class="icon-bar"></span>
     </button>
 
-    <%= image_tag 'icon.png', id: 'logo' %>
     <a id="name" href="#" class="navbar-brand">Karthik M A M</a>
   </div>
+
   <div class="collapse navbar-collapse" id="navigator">
     <ul class="nav navbar-nav navbar-right">
-      <li id="projectLink"><a href="#">Projects</a></li>
-      <li id="blogLink"><a href="#">Blog</a></li>
-      <li id="resumeLink"><a href="#">Resume</a></li>
-      <li id="contactLink" class="active"><a href="#">Contact</a></li>
-      <li><a href="#"> </a></li>
-      <li><a href="#"> </a></li>
+      <% %w[Projects Blog About Contact #].each do |menu| %>
+        <li class="<%= yield(:title)[menu] == menu ? 'active' : '' %>">
+          <%= link_to menu != '#' ? menu : '', eval("#{menu.downcase}_path") %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </nav>

@@ -1,0 +1,12 @@
+<% if @project.project_tags.any? %>
+  <div class="col-md-4">
+    <div class="well">
+      <h4>Tags: </h4>
+      <% @project.project_tags.each do |tag| %>
+          <a class="btn btn-primary" href="tags/?name=<%= tag.tag.name %>">
+            <%= tag.tag.name %>
+          </a>
+      <% end %>
+    </div>
+  </div>
+<% end %>

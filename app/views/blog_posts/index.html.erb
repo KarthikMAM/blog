@@ -1,0 +1,13 @@
+<%= render 'general' %>
+
+<h1>
+  <%= yield(:title) %>
+</h1>
+
+<%= will_paginate %>
+<ol class="blog-posts">
+  <% @blog_posts.each do |blog_post| %>
+      <li><%= render blog_post %></li>
+  <% end %>
+</ol>
+<%= will_paginate %>

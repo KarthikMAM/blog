@@ -3,11 +3,7 @@
 
 /* universal */
 * {
-  -webkit-transition:  time;
-  -moz-transition:  time;
-  -ms-transition:  time;
-  -o-transition:  time;
-  transition:  time;
+  border-radius: 0 !important;
 }
 
 body {
@@ -30,14 +26,41 @@ textarea {
 }
 
 /* headers */
-#logo {
-  height: 48px;
-  width: 48px;
-  float: left;
-  vertical-align: middle
-}
-
 #name {
   font-size: 1.5em !important;
   text-transform: uppercase;
+}
+
+/* projects */
+.projects, .blog-posts {
+  list-style: none;
+  margin: 0px;
+  li {
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-lighter;
+    &:last-of-type {
+      border-bottom: 0px;
+    }
+  }
+}
+
+.project, .blog-post {
+  div {
+    display: table-row;
+    img, h2 {
+      display: table-cell;
+      vertical-align: middle;
+      padding: 10px;
+      background-color: lightcoral;
+    }
+    div {
+      display: table-cell;
+      vertical-align: top;
+    }
+  }
+}
+
+/* form controls */
+.btn {
+  margin: 3px;
 }
