@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20170124043105) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
+    t.index ["name"], name: "index_tags_on_name"
   end
 
 end

@@ -59,12 +59,12 @@ class ProjectsController < ApplicationController
 
     if @project.nil?
       flash[:error] = [['Project', "Record #{params[:id]} not found"]]
-      redirect_to project_path
+      redirect_to '/projects'
     end
   end
 
   def update
-    @project = Project.includes(project_tags: [:tag]).find_by(params[:id])
+    @project = Project.includes(project_tags: [:tag]).find_by(id: params[:id])
 
     if @project.update_attributes(project_params)
       new_tags = params[:tags]

@@ -6,22 +6,22 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-99.times do |n|
-  name = Faker::Name.name
-  github = "example-#{n+1}"
-  desc = Faker::Lorem.sentence(word_count = 5)
-  content = '<p>' + Faker::Lorem.paragraphs(paragraph_count = 5).join("</p>  <p>") + '</p>'
-
-  Project.create!(
-      name: name,
-      github: github,
-      desc: desc,
-      content: content
-  )
-
-  BlogPost.create!(
-      title: name,
-      desc: desc,
-      content: content
-  )
-end
+# 99.times do |n|
+#   name = Faker::Name.name
+#   github = "example-#{n+1}"
+#   desc = Faker::Lorem.sentence(word_count = 5)
+#   content = '<p>' + Faker::Lorem.paragraphs(paragraph_count = 5).join("</p>  <p>") + '</p>'
+#
+#   Project.create!(
+#       name: name,
+#       github: github,
+#       desc: desc,
+#       content: content
+#   )
+#
+#   BlogPost.create!(
+#       title: name,
+#       desc: desc,
+#       content: content
+#   )
+# end

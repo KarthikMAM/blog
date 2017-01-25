@@ -2,7 +2,7 @@
 
 <% unless @project.nil? %>
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-lg-8">
 
         <h1><%= @project.name %></h1>
 
@@ -13,12 +13,16 @@
         <hr>
 
         <p>
-          <span class="glyphicon glyphicon-time"></span> <%= @project.created_at %>
+          <span class="glyphicon glyphicon-time"></span> <%= "Created #{time_ago_in_words(@project.created_at)} ago" %>
         </p>
-
         <hr>
 
-        <%= @project.content.html_safe %>
+        <div class="content">
+          <h4>Description</h4>
+          <p><%= @project.desc %></p>
+
+          <%= @project.content.html_safe %>
+        </div>
 
       </div>
 

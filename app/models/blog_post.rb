@@ -10,5 +10,5 @@ class BlogPost < ApplicationRecord
             presence: true
 
   has_many :blog_post_tags, dependent: :destroy
-  default_scope -> { order(created_at: :desc) }
+  default_scope -> { order(updated_at: :desc) }
 end

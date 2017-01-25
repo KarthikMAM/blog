@@ -58,12 +58,12 @@ class BlogPostsController < ApplicationController
 
     if @blog_post.nil?
       flash[:error] = [['Blog Post', "Record #{params[:id]} not found"]]
-      redirect_to blog_post_path
+      redirect_to '/blog/posts'
     end
   end
 
   def update
-    @blog_post = BlogPost.includes(blog_post_tags: [:tag]).find_by(params[:id])
+    @blog_post = BlogPost.includes(blog_post_tags: [:tag]).find_by(id: params[:id])
 
     if @blog_post.update_attributes(blog_post_params)
       new_tags = params[:tags]
