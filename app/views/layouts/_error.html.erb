@@ -5,9 +5,9 @@
       <h3>Error</h3>
       <ul>
         <% flash[:error].each do |message| %>
-          <li>
-            <%= "In #{message[0]}: #{message[1].to_s}" %>
-          </li>
+            <li>
+              <%= "In #{message[0]}: #{message[1].to_s}" %>
+            </li>
         <% end %>
       </ul>
     </div>

@@ -6,7 +6,7 @@ class BlogPost < ApplicationRecord
             presence: true
 
   validates :desc,
-            length: { maximum: 256 },
+            length: {maximum: 256},
             presence: true
 
   has_many :blog_post_tags, dependent: :destroy

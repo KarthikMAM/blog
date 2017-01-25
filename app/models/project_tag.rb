@@ -6,7 +6,7 @@ class ProjectTag < ApplicationRecord
             presence: true
 
   validates_uniqueness_of :tag_id,
-                          scope: [ :project_id ]
+                          scope: [:project_id]
 
   belongs_to :project
   belongs_to :tag

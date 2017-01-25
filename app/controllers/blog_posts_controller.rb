@@ -9,7 +9,7 @@ class BlogPostsController < ApplicationController
     @blog_post = BlogPost.new(blog_post_params)
 
     if @blog_post.save
-      params[:tag][:name].to_s.split(',').each do |tag|
+      params[:tags].to_s.split(',').each do |tag|
         Tag.create(name: tag.strip)
         BlogPostTag.create(
             blog_post_id: @blog_post.id,
@@ -38,11 +38,13 @@ class BlogPostsController < ApplicationController
     if @blog_post.nil?
       flash[:error] = [['Blog Post', "Record #{params[:id]} not found"]]
       redirect_to blog_post_path
-    elsif @blog_post.blog_post_tags.any?
+    else
       @form_target = "/admin/blog/posts/#{@blog_post.id}"
 
-      @blog_post.blog_post_tags.each do |tag|
-        @tags << tag.tag.name
+      if @blog_post.blog_post_tags.any?
+        @blog_post.blog_post_tags.each do |tag|
+          @tags << tag.tag.name
+        end
       end
 
       @tags = @tags.join(', ')
@@ -67,7 +69,7 @@ class BlogPostsController < ApplicationController
       new_tags = params[:tags]
                      .to_s.downcase
                      .split(',')
-                     .map{ |e| e.strip }
+                     .map { |e| e.strip }
                      .to_set
 
       old_tags = Set.new

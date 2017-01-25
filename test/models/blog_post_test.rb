@@ -44,8 +44,7 @@ class BlogPostTest < ActiveSupport::TestCase
       @blog_post.desc = desc
       if desc.size > 256
         assert_not @blog_post.valid?
-      elsif
-        assert @blog_post.valid?
+      elsif assert @blog_post.valid?
       end
     end
   end

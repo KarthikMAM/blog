@@ -12,13 +12,6 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     assert_select 'body ul.nav li', {count: 5, class: ''}
   end
 
-  test 'should get blog' do
-    get blog_path
-    assert_response :success
-    assert_select 'head title', {count: 1, text: "Blog | #{@default_title}"}
-    assert_select 'body ul.nav li', {count: 1, class: 'active', text: 'Blog'}
-  end
-
   test 'should get about' do
     get about_path
     assert_response :success

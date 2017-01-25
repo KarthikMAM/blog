@@ -12,9 +12,9 @@
   <div class="collapse navbar-collapse" id="navigator">
     <ul class="nav navbar-nav navbar-right">
       <% %w[Projects Blog About Contact #].each do |menu| %>
-        <li class="<%= yield(:title)[menu] == menu ? 'active' : '' %>">
-          <%= link_to menu != '#' ? menu : '', eval("#{menu.downcase}_path") %>
-        </li>
+          <li class="<%= yield(:title)[menu] == menu ? 'active' : '' %>">
+            <%= link_to menu != '#' ? menu : '', eval("#{menu.downcase}_path") %>
+          </li>
       <% end %>
     </ul>
   </div>

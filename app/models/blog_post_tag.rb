@@ -6,7 +6,7 @@ class BlogPostTag < ApplicationRecord
             presence: true
 
   validates_uniqueness_of :tag_id,
-                          scope: [ :blog_post_id ]
+                          scope: [:blog_post_id]
 
   belongs_to :blog_post
   belongs_to :tag

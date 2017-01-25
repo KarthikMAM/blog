@@ -38,12 +38,15 @@ class ProjectsController < ApplicationController
     if @project.nil?
       flash[:error] = [['Project', "Record #{params[:id]} not found"]]
       redirect_to project_path
-    elsif @project.project_tags.any?
+    else
       @form_target = "/admin/projects/#{@project.id}"
 
-      @project.project_tags.each do |tag|
-        @tags << tag.tag.name
+      if @project.project_tags.any?
+        @project.project_tags.each do |tag|
+          @tags << tag.tag.name
+        end
       end
+
 
       @tags = @tags.join(', ')
     end
@@ -76,7 +79,6 @@ class ProjectsController < ApplicationController
       end
 
       (new_tags - old_tags).each do |add_tag|
-        print(add_tag)
         Tag.create(name: add_tag.strip)
         ProjectTag.create(
             tag_id: Tag.find_by(name: add_tag.strip).id,
