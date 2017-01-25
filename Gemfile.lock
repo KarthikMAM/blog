@@ -45,6 +45,8 @@ GEM
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap-will_paginate (0.0.10)
+      will_paginate
     builder (3.2.3)
     coderay (1.1.1)
     coffee-rails (4.2.1)
@@ -56,8 +58,12 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.4)
     debug_inspector (0.0.2)
+    emd (0.1.0)
+      redcarpet
     erubis (2.7.0)
     execjs (2.7.0)
+    faker (1.6.6)
+      i18n (~> 0.5)
     ffi (1.9.17-x86-mingw32)
     formatador (0.2.5)
     globalid (0.3.7)
@@ -150,6 +156,7 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    redcarpet (3.4.0)
     ruby-progressbar (1.8.1)
     sass (3.4.23)
     sass-rails (5.0.6)
@@ -191,14 +198,18 @@ GEM
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    will_paginate (3.1.0)
 
 PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
   bootstrap-sass
+  bootstrap-will_paginate (= 0.0.10)
   byebug (= 9.0.0)
   coffee-rails (= 4.2.1)
+  emd
+  faker (= 1.6.6)
   guard (= 2.13.0)
   guard-minitest (= 2.4.4)
   jbuilder (= 2.4.1)
@@ -209,6 +220,7 @@ DEPENDENCIES
   puma (= 3.4.0)
   rails (= 5.0.1)
   rails-controller-testing (= 0.1.1)
+  redcarpet
   sass-rails (= 5.0.6)
   spring (= 1.7.2)
   spring-watcher-listen (= 2.0.0)
@@ -217,6 +229,7 @@ DEPENDENCIES
   tzinfo-data
   uglifier (= 3.0.0)
   web-console (= 3.1.1)
+  will_paginate (= 3.1.0)
 
 BUNDLED WITH
    1.13.7

@@ -1,0 +1,13 @@
+<%= render 'general' %>
+
+<h2>
+  <%= 'Projects with tag' %> <b><%= @tag %></b>
+</h2>
+
+<%= will_paginate %>
+<ol class="projects">
+  <% @projects.each do |project| %>
+      <li><%= render project.project %></li>
+  <% end %>
+</ol>
+<%= will_paginate %>

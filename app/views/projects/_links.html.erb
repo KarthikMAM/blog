@@ -1,0 +1,16 @@
+<div class="col-md-4">
+  <hr>
+  <div class="well">
+    <h4>Links: </h4>
+
+    <% github = "https://github.com/KarthikMAM/#{@project.github}" %>
+    <a class="btn btn-primary" href="<%= github %>" target="_blank">GitHub</a>
+    <a class="btn btn-primary" href="<%= "#{github}/issues" %>" target="_blank">Issue</a>
+
+    <% if @project.store != '' %>
+        <a class="btn btn-primary" href="<%= @project.store %>" target="_blank">Release</a>
+    <% else %>
+        <a class="btn btn-primary" href="<%= "#{github}/releases" %>" target="_blank">Release</a>
+    <% end %>
+  </div>
+</div>

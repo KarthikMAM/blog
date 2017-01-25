@@ -1,0 +1,27 @@
+<%= render 'general' %>
+
+<% unless @blog_post.nil? %>
+    <div class="row">
+      <div class="col-md-8">
+
+        <h1><%= @blog_post.title %></h1>
+
+        <p class="lead">
+          by <a href="#">Karthik M A M</a>
+        </p>
+
+        <hr>
+
+        <p>
+          <span class="glyphicon glyphicon-time"></span> <%= @blog_post.created_at %>
+        </p>
+
+        <hr>
+
+        <%= @blog_post.content.html_safe %>
+
+      </div>
+
+      <%= render 'tags' %>
+    </div>
+<% end %>

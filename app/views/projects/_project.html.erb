@@ -1,0 +1,12 @@
+<div class="project" id="project-<%= project.id %>">
+  <div>
+    <div>
+      <h3>
+        <%= link_to project.name, project %>
+      </h3>
+      <p>
+        <%= project.desc.html_safe %>
+      </p>
+    </div>
+  </div>
+</div>
