@@ -1,0 +1,18 @@
+<%= render 'general' %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="center">Login</h4>
+  </div>
+  <div class="panel-body">
+    <%= form_tag login_path do %>
+        <%= label_tag :user %>
+        <%= text_field_tag :user, '', class: 'form-control' %>
+        <br>
+        <%= label_tag :password %>
+        <%= password_field_tag :password, '', class: 'form-control' %>
+        <br>
+        <%= submit_tag 'Log In', class: 'form-control btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

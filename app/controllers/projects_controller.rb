@@ -91,7 +91,7 @@ class ProjectsController < ApplicationController
             .destroy
       end
 
-      flash[:notice] = 'Update successful'
+      flash[:success] = 'Update successful'
       redirect_to @project
     else
       flash[:error] = @project.errors.messages

@@ -92,7 +92,7 @@ class BlogPostsController < ApplicationController
             .destroy
       end
 
-      flash[:notice] = 'Update successful'
+      flash[:success] = 'Update successful'
       redirect_to @blog_post
     else
       flash[:error] = @blog_post.errors.messages
