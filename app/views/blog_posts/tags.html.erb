@@ -5,9 +5,9 @@
 </h2>
 
 <%= will_paginate %>
-<ol class="blog_posts">
+<ul class="blog-posts">
   <% @blog_posts.each do |blog_post| %>
       <li><%= render blog_post.blog_post %></li>
   <% end %>
-</ol>
+</ul>
 <%= will_paginate %>
