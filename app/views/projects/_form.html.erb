@@ -1,5 +1,8 @@
-<div class="row">
-  <div class="col-lg-6 col-lg-offset-3">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="center"><%= @project.nil? || @project.id.nil? ? 'Create new project' : 'Edit project' %></h4>
+  </div>
+  <div class="panel-body">
     <%= form_for @project, url: @form_target do |f| %>
         <br>
         <%= f.label :name %>
@@ -15,7 +18,24 @@
         <%= f.text_area :desc, class: 'form-control' %>
         <br>
         <%= f.label :content %>
-        <%= f.text_area :content, class: 'form-control', style: 'height:150px' %>
+        <div class="row" id="html-editor" style="height: 550px">
+          <div class="col-md-6">
+            <%= f.text_area :content, class: 'form-control', style: 'height:550px', onkeyup: 'updateContent(this.value)' %>
+            <script type="text/javascript" charset="utf-8">
+                var updateContent = function (htmlContent) {
+                    var contentDiv = document.getElementById('html-content');
+                    contentDiv.innerHTML = htmlContent;
+                }
+            </script>
+          </div>
+
+          <div class="col-md-6">
+            <div class="panel panel-default">
+              <div id="html-content" class="content" style="overflow: auto; height: 550px">
+              </div>
+            </div>
+          </div>
+        </div>
         <br>
         <%= label_tag 'tags' %>
         <%= text_field_tag 'tags', @tags, id: 'tags', type: 'text', class: 'form-control' %>

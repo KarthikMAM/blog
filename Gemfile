@@ -12,6 +12,8 @@ gem 'bootstrap-sass'
 gem 'will_paginate',            '3.1.0'
 gem 'bootstrap-will_paginate',  '0.0.10'
 gem 'faker',                    '1.6.6'
+gem 'redis'
+gem 'redis-namespace'
 
 group :development, :test do
   gem 'sqlite3', '1.3.12'

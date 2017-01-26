@@ -8,6 +8,8 @@ class BlogPostsController < ApplicationController
   def create
     @blog_post = BlogPost.new(blog_post_params)
 
+    print(params)
+
     if @blog_post.save
       params[:tags].to_s.split(',').each do |tag|
         Tag.create(name: tag.strip)
