@@ -1,13 +1,15 @@
 <%= render 'general' %>
 
-<h2>
+<h3>
   <%= 'Blogs with tag' %> <b><%= @tag %></b>
-</h2>
+</h3>
 
 <%= will_paginate %>
-<ul class="blog-posts">
+<table class="blog-posts table">
+  <tbody>
   <% @blog_posts.each do |blog_post| %>
-      <li><%= render blog_post.blog_post %></li>
+      <%= render blog_post %>
   <% end %>
-</ul>
+  </tbody>
+</table>
 <%= will_paginate %>

@@ -18,9 +18,9 @@
         <%= f.text_area :desc, class: 'form-control' %>
         <br>
         <%= f.label :content %>
-        <div class="row" id="html-editor" style="height: 550px">
+        <div class="row" id="html-editor">
           <div class="col-md-6">
-            <%= f.text_area :content, class: 'form-control', style: 'height:550px', onkeyup: 'updateContent(this.value)' %>
+            <%= f.text_area :content, class: 'form-control', style: 'height:550px; margin: 10px 0px', onkeyup: 'updateContent(this.value)' %>
             <script type="text/javascript" charset="utf-8">
                 var updateContent = function (htmlContent) {
                     var contentDiv = document.getElementById('html-content');
@@ -30,9 +30,8 @@
           </div>
 
           <div class="col-md-6">
-            <div class="panel panel-default">
-              <div id="html-content" class="content" style="overflow: auto; height: 550px">
-              </div>
+            <div id="html-content" class="content" style="overflow: auto; height: 550px; border: double; margin: 10px 0px">
+
             </div>
           </div>
         </div>
