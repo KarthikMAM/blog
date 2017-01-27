@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(version: 20170124043105) do
   end
 
   create_table "blog_posts", force: :cascade do |t|
-    t.string   "title"
-    t.text     "desc"
-    t.text     "content"
+    t.string "title"
+    t.text "desc"
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["title"], name: "index_blog_posts_on_title"
@@ -36,11 +36,11 @@ ActiveRecord::Schema.define(version: 20170124043105) do
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string   "name"
-    t.string   "github"
-    t.string   "store"
-    t.text     "desc"
-    t.text     "content"
+    t.string "name"
+    t.string "github"
+    t.string "store"
+    t.text "desc"
+    t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

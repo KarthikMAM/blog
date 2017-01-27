@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get '/home',        to: 'static_pages#home'
-  get '/projects',    to: 'projects#index'
-  get '/blog/posts',  to: 'blog_posts#index', as: 'blog'
-  get '/about',       to: 'static_pages#about'
-  get '/contact',     to: 'static_pages#contact'
+  get '/home', to: 'static_pages#home'
+  get '/projects', to: 'projects#index'
+  get '/blog/posts', to: 'blog_posts#index', as: 'blog'
+  get '/about', to: 'static_pages#about'
+  get '/contact', to: 'static_pages#contact'
 
   root 'static_pages#home'
 
@@ -19,8 +19,8 @@ Rails.application.routes.draw do
     resources :blog_posts, only: [:update, :edit, :new, :create], path: '/blog/posts'
   end
 
-  get     '/login',   to: 'admin#new',      as: 'login'
-  post    '/login',   to: 'admin#create'
-  get     '/admin',   to: 'admin#show',     as: 'admin'
-  delete  '/logout',  to: 'admin#destroy',  as: 'logout'
+  get '/login', to: 'admin#new', as: 'login'
+  post '/login', to: 'admin#create'
+  get '/admin', to: 'admin#show', as: 'admin'
+  delete '/logout', to: 'admin#destroy', as: 'logout'
 end

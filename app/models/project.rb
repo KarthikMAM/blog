@@ -5,15 +5,15 @@ class Project < ApplicationRecord
 
   validates :github,
             presence: true,
-            uniqueness: { case_sensitive: false },
-            format: { with: /\A[\w\-]+\z/i }
+            uniqueness: {case_sensitive: false},
+            format: {with: /\A[\w\-]+\z/i}
 
   validates :store,
-            format: { with: /\A(([ ]*)|(http[s]?:\/\/)?[\w\-.]+\.[\w]{2,5}[\/\w-]*)\z/ }
+            format: {with: /\A(([ ]*)|(http[s]?:\/\/)?[\w\-.]+\.[\w]{2,5}[\/\w-]*)\z/}
 
   validates :desc,
             presence: true,
-            length: { maximum: 256 }
+            length: {maximum: 256}
 
   validates :content,
             presence: true
