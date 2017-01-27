@@ -32,9 +32,8 @@ textarea {
 }
 
 /* projects and blog post lists */
-.projects, .blog-posts {
+/*.projects, .blog-posts {
   list-style: none;
-  margin: 0px;
   padding-left: 0px !important;
   li {
     border-bottom: 1px solid $gray-lighter;
@@ -52,6 +51,19 @@ textarea {
       vertical-align: top;
     }
   }
+}*/
+
+.project, .blog-post {
+  td {
+    padding-left: 0 !important;
+    vertical-align: middle !important;
+  }
+}
+
+.projects, .blog-posts {
+  tr:nth-child(1) td {
+    border-top: 0px;
+  }
 }
 
 /* form controls */
@@ -68,8 +80,8 @@ textarea {
   h4 {
     font-weight: bold;
   }
-}
 
-th, td {
-  padding: 10px;
+  th, td {
+    padding: 10px;
+  }
 }

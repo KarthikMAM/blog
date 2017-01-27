@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_action 'requireLogIn', only: [:edit, :update, :create, :new]
+
   def index
     @projects = Project
                     .includes(project_tags: [:tag])

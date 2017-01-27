@@ -1,4 +1,6 @@
 class BlogPostsController < ApplicationController
+  before_action 'requireLogIn', only: [:edit, :update, :create, :new]
+
   def index
     @blog_posts = BlogPost
                       .includes(blog_post_tags: [:tag])

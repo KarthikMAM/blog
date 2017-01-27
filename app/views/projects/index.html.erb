@@ -1,13 +1,15 @@
 <%= render 'general' %>
 
-<h1>
+<h3>
   <%= yield(:title) %>
-</h1>
+</h3>
 
 <%= will_paginate %>
-<ol class="projects">
+<table class="projects table">
+  <tbody>
   <% @projects.each do |project| %>
-      <li><%= render project %></li>
+      <%= render project %>
   <% end %>
-</ol>
+  </tbody>
+</table>
 <%= will_paginate %>
