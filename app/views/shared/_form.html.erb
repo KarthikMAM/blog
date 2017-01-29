@@ -18,18 +18,19 @@
         <div class="row html-field">
           <div class="col-md-6">
             <%= f.text_area :content, class: 'form-control html-editor', onkeyup: 'updateContent()' %>
-            <script type="text/javascript" charset="utf-8">
-                var updateContent = function () {
-                    var contentDiv = document.querySelector('.html-content');
-                    contentDiv.innerHTML = document.querySelector(".html-editor").value;
-                };
-            </script>
           </div>
 
           <div class="col-md-6">
             <div class="html-content content" onload="updateContent()">
 
             </div>
+            <script type="text/javascript" charset="utf-8">
+                var updateContent = function () {
+                    var contentDiv = document.querySelector('.html-content');
+                    contentDiv.innerHTML = document.querySelector(".html-editor").value;
+                };
+                updateContent();
+            </script>
           </div>
         </div>
         <br>
