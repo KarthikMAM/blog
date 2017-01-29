@@ -1,10 +1,8 @@
 class ProjectsController < ApplicationController
-  before_action 'requireLogIn', only: [:edit, :update, :create, :new]
+  before_action :requireLogIn, only: [:edit, :update, :create, :new]
 
   def index
-    @projects = Project
-                    .includes(project_tags: [:tag])
-                    .paginate(page: params[:page], per_page: 10)
+    @projects = Project.paginate(page: params[:page], per_page: 10)
   end
 
   def create
@@ -17,6 +15,7 @@ class ProjectsController < ApplicationController
             project_id: @project.id,
             tag_id: Tag.find_by(name: tag.strip).id)
       end
+      Slug[controller_name, @project.to_param] = @project.id
 
       flash[:success] = 'Project added successfully'
       redirect_to @project
@@ -30,45 +29,39 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @tags = ''
-    @form_target = '/admin/projects'
   end
 
   def edit
-    @project = Project.includes(project_tags: [:tag]).find_by(id: params[:id])
+    @project = Project.includes(project_tags: [:tag]).find_by(id: Slug[controller_name, params[:id]])
     @tags = []
 
     if @project.nil?
       flash[:error] = [['Project', "Record #{params[:id]} not found"]]
       redirect_to project_path
     else
-      @form_target = "/admin/projects/#{@project.id}"
-
-      if @project.project_tags.any?
-        @project.project_tags.each do |tag|
-          @tags << tag.tag.name
-        end
-      end
-
-
-      @tags = @tags.join(', ')
+      @tags = @project.project_tags.map{ |e| e.tag.name }.join(', ')
     end
   end
 
   def show
     @project = Project
                    .includes(project_tags: [:tag])
-                   .find_by(id: params[:id])
+                   .find_by(id: Slug[controller_name, params[:id]])
 
     if @project.nil?
       flash[:error] = [['Project', "Record #{params[:id]} not found"]]
-      redirect_to '/projects'
+      redirect_to projects_path
     end
   end
 
   def update
-    @project = Project.includes(project_tags: [:tag]).find_by(id: params[:id])
+    @project = Project
+                   .includes(project_tags: [:tag])
+                   .find_by(id: Slug[controller_name, params[:id]])
 
     if @project.update_attributes(project_params)
+      Slug[controller_name, @project.to_param] = @project.id
+
       new_tags = params[:tags]
                      .to_s.downcase
                      .split(',')
@@ -102,11 +95,14 @@ class ProjectsController < ApplicationController
   end
 
   def tags
-    @tag = params[:name]
-    @projects = Tag.includes(project_tags: [:project])
-                    .find_by(name: params[:name])
-                    .project_tags
+    @tag = CGI::unescape(params[:name])
+    @projects = ProjectTag
+                    .includes(:project)
+                    .where(tag_id: Tag.find_by(name: @tag).id)
                     .paginate(page: params[:page], per_page: 10)
+  rescue
+    flash[:error] = [['Tags', "#{@tag} not found"]]
+    redirect_to projects_path
   end
 
   private

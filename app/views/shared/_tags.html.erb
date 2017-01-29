@@ -1,0 +1,8 @@
+<%- if tags.any? %>
+    <div class="well">
+      <h4>Tags: </h4>
+      <%- tags.each do |tag| %>
+          <%= link_to tag.name, "tags/#{CGI.escape(tag.name)}", class: 'btn btn-primary tag' %>
+      <%- end %>
+    </div>
+<%- end %>

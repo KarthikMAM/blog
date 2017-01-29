@@ -1,2 +1,7 @@
-<%= render 'general' %>
-<%= render 'form' %>
+<%- unless @blog_post.nil? %>
+    <%= render partial: 'shared/form', locals: {
+        heading: 'Create Blog Post',
+        item: @blog_post,
+        tags: @tags,
+    } %>
+<%- end %>

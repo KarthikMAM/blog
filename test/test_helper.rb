@@ -7,4 +7,13 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def login
+    $redis.set('user', 'test')
+    $redis.set('password', Digest::SHA1.hexdigest('test'))
+    post login_path, params: { user: 'test', password: 'test' }
+  end
+
+  def logout
+    get logout_path
+  end
 end

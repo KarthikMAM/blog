@@ -1,2 +1,7 @@
-<%= render 'general' %>
-<%= render 'form' %>
+<%- unless @project.nil? %>
+    <%= render partial: 'shared/form', locals: {
+        heading: 'Create Project',
+        item: @project,
+        tags: @tags
+    } %>
+<%- end %>

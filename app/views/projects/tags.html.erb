@@ -1,15 +1,4 @@
-<%= render 'general' %>
-
-<h3>
-  <%= 'Projects with tag' %> <b><%= @tag %></b>
-</h3>
-
-<%= will_paginate %>
-<table class="projects table" style="border: none">
-  <tbody>
-  <% @projects.each do |project| %>
-      <%= render project %>
-  <% end %>
-  </tbody>
-</table>
-<%= will_paginate %>
+<%= render partial: 'shared/list', locals: {
+    heading: "##{@tag.titleize}",
+    collection: @projects.map { |e| e.project }
+} %>

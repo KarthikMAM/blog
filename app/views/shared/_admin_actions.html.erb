@@ -1,0 +1,7 @@
+<%- if logged_in? %>
+    <div class="well">
+      <h4>Admin Ops: </h4>
+      <a href="<%= edit_path(item) %>" class="btn btn-danger" data-turbolinks="false">Edit</a>
+      <a href="<%= new_path %>" class="btn btn-danger" data-turbolinks="false">New</a>
+    </div>
+<%- end %>

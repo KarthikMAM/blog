@@ -1,0 +1,14 @@
+<%= render 'shared/errors' %>
+
+<h3>
+  <%= heading %>
+  <%= link_to('+', new_path, 'data-turbolinks'=> 'false') if logged_in? %>
+</h3>
+
+<%= will_paginate %>
+<table class="<%= controller_name.dasherize %> table">
+  <tbody>
+  <%= render partial: 'shared/item', collection: collection, cached: !logged_in?, as: :item %>
+  </tbody>
+</table>
+<%= will_paginate %>

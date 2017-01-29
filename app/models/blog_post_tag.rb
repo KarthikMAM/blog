@@ -8,6 +8,6 @@ class BlogPostTag < ApplicationRecord
   validates_uniqueness_of :tag_id,
                           scope: [:blog_post_id]
 
-  belongs_to :blog_post
+  belongs_to :blog_post, touch: true
   belongs_to :tag
 end

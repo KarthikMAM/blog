@@ -1,9 +1,35 @@
-<%= provide(:title, 'Home') %>
+<%- cache('home') do %>
+    <html style="height: 100%">
 
-<div class="center middle">
-  <h1>Welcome to Karthik's Blog</h1>
+    <head>
+      <title><%= full_title('Home') %></title>
+      <%= csrf_meta_tags %>
+      <%= stylesheet_link_tag 'application', media: 'all',
+                              'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
 
-  <h2>
-    This is the home page of Karthik
-  </h2>
-</div>
+    <body style="height:100%">
+    <div class="center">
+      <h3>Karthik M A M</h3>
+
+      <br>
+
+      <%= image_tag 'profile.jpg', style: 'border-radius: 100% !important;', size: '200x200' %>
+
+      <br> <br> <br>
+
+      <div class="navbar nav-pills">
+        <%= link_to 'Projects', projects_path, class: 'btn btn-default' %>
+        <%= link_to 'Blog', blog_posts_path, class: 'btn btn-default' %>
+        <%= link_to 'About', about_path, class: 'btn btn-default' %>
+        <%= link_to 'Contact', contact_path, class: 'btn btn-default' %>
+      </div>
+
+      <%= render partial: 'shared/social' %>
+    </div>
+    </body>
+
+    </html>
+<%- end %>

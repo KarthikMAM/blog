@@ -1,0 +1,10 @@
+<tr class="<%= "#{controller_name.singularize.dasherize}" %>" id="<%= "#{controller_name.singularize.dasherize}-#{item.id}" %>">
+  <td>
+    <h3> <%= link_to item.name, item %> </h3>
+    <h5><span class="glyphicon glyphicon-time"></span> <%= "Posted #{time_ago_in_words(item.created_at)} ago" %></h5>
+    <p> <%= item.desc %> </p>
+  </td>
+  <%- if logged_in? %>
+      <td class="admin-actions"> <%= link_to 'Edit', edit_path(item), class: 'btn btn-danger', 'data-turbolinks' => 'false' %> </td>
+  <%- end %>
+</tr>

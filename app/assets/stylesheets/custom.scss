@@ -7,7 +7,7 @@
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 90px;
 }
 
 section {
@@ -31,47 +31,48 @@ textarea {
   text-transform: uppercase;
 }
 
-/* projects and blog post lists */
-/*.projects, .blog-posts {
-  list-style: none;
-  padding-left: 0px !important;
-  li {
-    border-bottom: 1px solid $gray-lighter;
-    &:last-of-type {
-      border-bottom: 0px;
-    }
-  }
-}
-
-.project, .blog-post {
-  div {
-    display: table-row;
-    div {
-      display: table-cell;
-      vertical-align: top;
-    }
-  }
-}*/
-
-.project, .blog-post {
-  td {
-    padding-left: 0 !important;
-    vertical-align: middle !important;
-  }
-}
-
+/* project and blog post list */
 .projects, .blog-posts {
-  tr:nth-child(1) td {
-    border-top: 0px;
+  tr:first-child {
+    td {
+      border-top: 0;
+    }
+  }
+
+  .project, .blog-post {
+    td {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      vertical-align: middle !important;
+      &:first-child {
+        padding: 5px 5px 5px 0 !important;
+      }
+      &:last-child {
+        padding: 0px !important;
+      }
+    }
+
+    .admin-actions {
+      text-align: right;
+    }
   }
 }
 
 /* form controls */
-.btn {
-  margin: 3px;
+.html-field {
+  .html-editor, .html-content {
+    height: 550px;
+    margin: 10px 0px
+  }
+
+  .html-content {
+    overflow: auto;
+    border: ridge;
+    padding: 5px;
+  }
 }
 
-/* content text */
+/* show page */
 .content {
   h1, h2, h3, h4, h5, h6 {
     padding-top: 10px;
@@ -84,4 +85,12 @@ textarea {
   th, td {
     padding: 10px;
   }
+
+  pre {
+    padding-top: 10px;
+  }
+}
+
+.tag {
+  margin-top: 5px;
 }

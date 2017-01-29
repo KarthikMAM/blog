@@ -8,6 +8,6 @@ class ProjectTag < ApplicationRecord
   validates_uniqueness_of :tag_id,
                           scope: [:project_id]
 
-  belongs_to :project
+  belongs_to :project, touch: true
   belongs_to :tag
 end

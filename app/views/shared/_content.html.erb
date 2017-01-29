@@ -1,0 +1,18 @@
+<!-- page heading -->
+<div class='page-header'>
+  <h1><%= item.name %></h1>
+  <p class="lead"> by <a href="/">Karthik M A M</a></p>
+</div>
+
+<!-- created time -->
+<p>
+  <span class="glyphicon glyphicon-time"></span> <%= "Created #{time_ago_in_words(item.created_at)} ago" %>
+</p>
+<hr>
+
+<!-- actual content -->
+<div class="content">
+  <h4>Description</h4>
+  <p><%= item.desc %></p>
+  <%= item.content.html_safe %>
+</div>

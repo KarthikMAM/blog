@@ -22,5 +22,5 @@ Rails.application.routes.draw do
   get '/login', to: 'admin#new', as: 'login'
   post '/login', to: 'admin#create'
   get '/admin', to: 'admin#show', as: 'admin'
-  delete '/logout', to: 'admin#destroy', as: 'logout'
+  get '/logout', to: 'admin#destroy', as: 'logout'
 end

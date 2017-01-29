@@ -1,32 +1,14 @@
-<%= render 'general' %>
-
-<% unless @project.nil? %>
+<%- cache_unless logged_in?, @project do %>
+<%= render 'shared/errors' %>
     <div class="row">
-      <div class="col-lg-8">
-
-        <h1><%= @project.name %></h1>
-
-        <p class="lead">
-          by <a href="#">Karthik M A M</a>
-        </p>
-
-        <hr>
-
-        <p>
-          <span class="glyphicon glyphicon-time"></span> <%= "Created #{time_ago_in_words(@project.created_at)} ago" %>
-        </p>
-        <hr>
-
-        <div class="content">
-          <h4>Description</h4>
-          <p><%= @project.desc %></p>
-
-          <%= @project.content.html_safe %>
-        </div>
-
+      <div class="col-md-8">
+        <%= render 'shared/content', item: @project %>
       </div>
-
-      <%= render 'links' %>
-      <%= render 'tags' %>
+      <div class="col-md-4">
+        <hr>
+        <%= render 'shared/admin_actions', item: @project %>
+        <%= render 'links' %>
+        <%= render 'shared/tags', tags: @project.project_tags.map { |e| e.tag } %>
+      </div>
     </div>
-<% end %>
+<%- end %>

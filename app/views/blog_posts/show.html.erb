@@ -1,27 +1,13 @@
-<%= render 'general' %>
-
-<% unless @blog_post.nil? %>
+<%- cache_unless logged_in?, @blog_post do %>
+    <%= render 'shared/errors' %>
     <div class="row">
       <div class="col-lg-8">
-
-        <h1><%= @blog_post.title %></h1>
-
-        <p class="lead">
-          by <a href="#">Karthik M A M</a>
-        </p>
-
-        <hr>
-
-        <p>
-          <span class="glyphicon glyphicon-time"></span> <%= "Created #{time_ago_in_words(@blog_post.created_at)} ago" %>
-        </p>
-
-        <hr>
-
-        <%= @blog_post.content.html_safe %>
-
+        <%= render 'shared/content', item: @blog_post %>
       </div>
-
-      <%= render 'tags' %>
+      <div class="col-lg-4">
+        <hr>
+        <%= render 'shared/admin_actions', item: @blog_post %>
+        <%= render 'shared/tags', tags: @blog_post.blog_post_tags.map { |e| e.tag } %>
+      </div>
     </div>
-<% end %>
+<%- end %>

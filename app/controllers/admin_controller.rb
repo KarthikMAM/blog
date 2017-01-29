@@ -1,5 +1,4 @@
 class AdminController < ApplicationController
-  include AdminHelper
 
   def new
 
@@ -17,6 +16,7 @@ class AdminController < ApplicationController
 
   def destroy
     log_out
+    redirect_to login_path
   end
 
   def show

@@ -6,6 +6,7 @@ module AdminHelper
     token = Digest::SHA1.hexdigest(SecureRandom.urlsafe_base64)
     $redis.set('token', token)
     cookies.permanent.signed[:token] = token
+    #session[:token] = token
   end
 
   def log_in(user, password)
@@ -14,30 +15,24 @@ module AdminHelper
       remember
       return true
     else
+      cookies.permanent.signed[:token] = nil
       return false
     end
   end
 
   def logged_in?
-    if session[:token] && session[:token] == cookies.signed[:token]
-      return true
-    elsif cookies.signed[:token] && cookies.signed[:token] == $redis.get('token')
-      session[:token] = cookies.signed[:token]
-      return true
-    else
-      return false
-    end
+    cookies.signed[:token] && cookies.signed[:token] == $redis.get('token')
+    #session[:token] && session[:token] == $redis.get('token')
   end
 
   def requireLogIn
-    print "User is logged in #{logged_in?}"
     unless logged_in?
-      flash[:error] = [['Log In', 'User not logged in']]
-      redirect_to login_path
+      raise ActionController::RoutingError.new ("No route matches [GET] '#{request.original_fullpath}'")
     end
   end
 
   def log_out
-    $redis.del('session')
+    $redis.del('token')
+    cookies.permanent[:token] = nil
   end
 end

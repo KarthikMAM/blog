@@ -1,15 +1,4 @@
-<%= render 'general' %>
-
-<h3>
-  <%= yield(:title) %>
-</h3>
-
-<%= will_paginate %>
-<table class="projects table">
-  <tbody>
-  <% @projects.each do |project| %>
-      <%= render project %>
-  <% end %>
-  </tbody>
-</table>
-<%= will_paginate %>
+<%= render partial: 'shared/list', locals: {
+    heading: 'Projects',
+    collection: @projects
+} %>

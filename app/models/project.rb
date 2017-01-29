@@ -1,4 +1,8 @@
 class Project < ApplicationRecord
+  def to_param
+    name.parameterize
+  end
+
   validates :name,
             presence: true,
             uniqueness: true
@@ -17,7 +21,6 @@ class Project < ApplicationRecord
 
   validates :content,
             presence: true
-
 
   has_many :project_tags, dependent: :destroy
   default_scope -> { order(updated_at: :desc) }

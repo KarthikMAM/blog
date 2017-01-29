@@ -1,24 +1,21 @@
 class BlogPostsController < ApplicationController
-  before_action 'requireLogIn', only: [:edit, :update, :create, :new]
+  before_action :requireLogIn, only: [:edit, :update, :create, :new]
 
   def index
-    @blog_posts = BlogPost
-                      .includes(blog_post_tags: [:tag])
-                      .paginate(page: params[:page], per_page: 10)
+    @blog_posts = BlogPost.paginate(page: params[:page], per_page: 10)
   end
 
   def create
     @blog_post = BlogPost.new(blog_post_params)
 
-    print(params)
-
     if @blog_post.save
-      params[:tags].to_s.split(',').each do |tag|
+      params[:tags].to_s.downcase.split(',').each do |tag|
         Tag.create(name: tag.strip)
         BlogPostTag.create(
             blog_post_id: @blog_post.id,
             tag_id: Tag.find_by(name: tag.strip).id)
       end
+      Slug[controller_name, @blog_post.to_param] = @blog_post.id
 
       flash[:success] = 'Blog Post added successfully'
       redirect_to @blog_post
@@ -32,44 +29,39 @@ class BlogPostsController < ApplicationController
   def new
     @blog_post = BlogPost.new
     @tags = ''
-    @form_target = '/admin/blog/posts'
   end
 
   def edit
-    @blog_post = BlogPost.includes(blog_post_tags: [:tag]).find_by(id: params[:id])
+    @blog_post = BlogPost.includes(blog_post_tags: [:tag]).find_by(id: Slug[controller_name, params[:id]])
     @tags = []
 
     if @blog_post.nil?
       flash[:error] = [['Blog Post', "Record #{params[:id]} not found"]]
       redirect_to blog_post_path
     else
-      @form_target = "/admin/blog/posts/#{@blog_post.id}"
-
-      if @blog_post.blog_post_tags.any?
-        @blog_post.blog_post_tags.each do |tag|
-          @tags << tag.tag.name
-        end
-      end
-
-      @tags = @tags.join(', ')
+      @tags = @blog_post.blog_post_tags.map{ |e| e.tag.name }.join(', ')
     end
   end
 
   def show
     @blog_post = BlogPost
                      .includes(blog_post_tags: [:tag])
-                     .find_by(id: params[:id])
+                     .find_by(id: Slug[controller_name, params[:id]])
 
     if @blog_post.nil?
       flash[:error] = [['Blog Post', "Record #{params[:id]} not found"]]
-      redirect_to '/blog/posts'
+      redirect_to blog_posts_path
     end
   end
 
   def update
-    @blog_post = BlogPost.includes(blog_post_tags: [:tag]).find_by(id: params[:id])
+    @blog_post = BlogPost
+                     .includes(blog_post_tags: [:tag])
+                     .find_by(id: Slug[controller_name, params[:id]])
 
     if @blog_post.update_attributes(blog_post_params)
+      Slug[controller_name, @blog_post.to_param] = @blog_post.id
+
       new_tags = params[:tags]
                      .to_s.downcase
                      .split(',')
@@ -103,11 +95,14 @@ class BlogPostsController < ApplicationController
   end
 
   def tags
-    @tag = params[:name]
-    @blog_posts = Tag.includes(blog_post_tags: [:blog_post])
-                      .find_by(name: params[:name])
-                      .blog_post_tags
+    @tag = CGI::unescape(params[:name])
+    @blog_posts = BlogPostTag
+                      .includes(:blog_post)
+                      .where(tag_id: Tag.find_by(name: @tag).id)
                       .paginate(page: params[:page], per_page: 10)
+  rescue
+    flash[:error] = [['Tags', "#{@tag} not found"]]
+    redirect_to blog_posts_path
   end
 
   private

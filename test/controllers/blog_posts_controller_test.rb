@@ -1,8 +1,9 @@
 require 'test_helper'
+require 'digest'
 
 class BlogPostsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @default_title = "Karthik's Blog"
+    @default_title = "Karthik M A M"
 
     @blog_post = BlogPost.create(
         title: 'hello',
@@ -10,38 +11,47 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
         desc: 'world'
     )
     @fake_post = BlogPost.new
+    Slug['blog_posts', @blog_post.to_param] = @blog_post.id
+
+    login
+  end
+
+  def teardown
+    logout
+    $redis.del('blog_posts')
+    $redis.del("blog_posts-#{@blog_post.id}")
   end
 
   test 'should get blog posts' do
     get blog_posts_path
-    assert_select 'head title', {count: 1, text: "Blog | #{@default_title}"}
+    assert_select 'head title', {count: 1, text: "Blog Posts | #{@default_title}"}
     assert_select 'div.alert', {count: 0}
   end
 
   test 'should get blog post' do
     get blog_post_path(@blog_post)
     assert_response :success
-    assert_template 'blog_posts/show'
+    assert_template 'shared/_content'
     assert_select 'div.alert', {count: 0}
   end
 
   test 'should get new blog post page' do
     get new_blog_post_path
     assert_response :success
-    assert_template 'blog_posts/new'
+    assert_template 'shared/_form'
     assert_select 'div.alert', {count: 0}
   end
 
   test 'should get edit blog post page' do
     get edit_blog_post_path(@blog_post)
     assert_response :success
-    assert_template 'blog_posts/edit'
+    assert_template 'shared/_form'
     assert_select 'div.alert', {count: 0}
   end
 
   test 'should create a new blog post' do
     assert_difference %w(BlogPost.count BlogPostTag.count) do
-      post '/admin/blog/posts', params: {
+      post "/admin#{blog_posts_path}", params: {
           blog_post: {
               title: 'Test',
               desc: 'TestDesc',
@@ -59,7 +69,7 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
     blog_post_count = Project.count
     blog_post_tag_count = ProjectTag.count
 
-    post '/admin/blog/posts', params: {
+    post "/admin#{blog_posts_path}", params: {
         blog_post: {
             title: '',
             desc: '',
@@ -74,7 +84,7 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update a blog post' do
 
-    patch "/admin/blog/posts/#{@blog_post.id}", params: {
+    patch "/admin/#{blog_post_path(@blog_post)}", params: {
         blog_post: {
             title: 'hello',
             content: 'hello',
@@ -89,14 +99,14 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
     assert_equal @blog_post.content, 'hello'
     assert_equal @blog_post.desc, 'hello'
     assert_equal @blog_post.blog_post_tags.count, 1
-    assert_redirected_to "/blog/posts/#{@blog_post.id}"
+    assert_redirected_to blog_post_path(@blog_post)
   end
 
   test 'should not update a blog post' do
 
     assert_raises ArgumentError do
       get edit_blog_post_path(@blog_post.id)
-      patch "/admin/blog/posts/#{@blog_post.id}", params: {
+      patch "/admin/#{blog_post_path(@blog_post)}", params: {
           blog_post: {
               title: ' ',
               content: '',
