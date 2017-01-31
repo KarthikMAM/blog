@@ -10,12 +10,11 @@ class ProjectsController < ApplicationController
 
     if @project.save
       params[:tags].to_s.downcase.split(',').each do |tag|
-        Tag.create(name: tag.strip)
+        Tag.create(name: tag)
         ProjectTag.create(
             project_id: @project.id,
             tag_id: Tag.find_by(name: tag.strip).id)
       end
-      Slug[controller_name, @project.to_param] = @project.id
 
       flash[:success] = 'Project added successfully'
       redirect_to @project
@@ -60,7 +59,6 @@ class ProjectsController < ApplicationController
                    .find_by(id: Slug[controller_name, params[:id]])
 
     if @project.update_attributes(project_params)
-      Slug[controller_name, @project.to_param] = @project.id
 
       new_tags = params[:tags]
                      .to_s.downcase

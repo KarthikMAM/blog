@@ -1,0 +1,55 @@
+<div class="well">
+  <h4>Search</h4>
+
+  <%= form_tag '', onsubmit: 'return goto();', method: :get, style: 'form-control' do %>
+      <div class="input-group">
+        <%= text_field_tag :q, '', class: 'form-control', list: 'suggestions', onkeydown: 'update()', autocomplete: 'off' %>
+        <datalist id="suggestions"></datalist>
+
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+          <script type="text/javascript" charset="utf-8">
+              var type = "<%= action_name == 'tags' ? 'tags' : controller_name %>";
+
+              goto = function () {
+                  var target = document.getElementById('q').value;
+
+                  if (type == 'tags')  location.href = './' + target;
+                  else if (type == 'projects') location.href = '/projects/' + target;
+                  else location.href = '/blog/posts/' + target;
+
+                  return false;
+              };
+
+              var current = '';
+
+              update = function () {
+                  if (current != document.getElementById('q').value[0]) {
+
+                      var search_url = '/search' +
+                          '?q=' + document.getElementById('q').value +
+                          '&type=' + type;
+
+                      //get and update the contents of the suggestions box
+                      $.getJSON(search_url, function (data) {
+                          var suggestions = document.getElementById('suggestions');
+                          suggestions.innerHTML = '';
+
+                          var suggestion;
+                          for (var i in data) {
+                              suggestion = document.createElement('option');
+                              suggestion.value = data[i];
+                              suggestions.appendChild(suggestion);
+                          }
+                      });
+
+                      current = document.getElementById('q').value[0];
+                  }
+              };
+          </script>
+        </span>
+      </div>
+  <%- end %>
+</div>

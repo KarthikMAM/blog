@@ -5,7 +5,7 @@ class Tag < ApplicationRecord
             length: {maximum: 32}
 
   before_save {
-    self.name = name.downcase
+    self.name = name.strip.downcase
   }
 
   has_many :project_tags, dependent: :destroy

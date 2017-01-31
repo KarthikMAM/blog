@@ -23,4 +23,7 @@ Rails.application.routes.draw do
   post '/login', to: 'admin#create'
   get '/admin', to: 'admin#show', as: 'admin'
   get '/logout', to: 'admin#destroy', as: 'logout'
+
+
+  get '/search', to: 'search#query', as: 'search_path'
 end
