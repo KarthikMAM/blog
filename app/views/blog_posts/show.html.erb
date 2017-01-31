@@ -7,6 +7,7 @@
       <div class="col-lg-4">
         <hr>
         <%= render 'shared/admin_actions', item: @blog_post %>
+        <%= render 'shared/search' %>
         <%= render 'shared/tags', tags: @blog_post.blog_post_tags.map { |e| e.tag } %>
       </div>
     </div>

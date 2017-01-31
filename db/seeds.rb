@@ -25,12 +25,3 @@
 #       content: content
 #   )
 # end
-
-#populating redis slugs
-Project.all.each do |project|
-  Slug['projects', project.to_param] = project.id
-end
-
-BlogPost.all.each do |blog_post|
-  Slug['blog_posts', blog_post.to_param] = blog_post.id
-end

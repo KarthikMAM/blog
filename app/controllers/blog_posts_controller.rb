@@ -10,7 +10,7 @@ class BlogPostsController < ApplicationController
 
     if @blog_post.save
       params[:tags].to_s.downcase.split(',').each do |tag|
-        Tag.create(name: tag.strip)
+        Tag.create(name: tag)
         BlogPostTag.create(
             blog_post_id: @blog_post.id,
             tag_id: Tag.find_by(name: tag.strip).id)
@@ -60,7 +60,6 @@ class BlogPostsController < ApplicationController
                      .find_by(id: Slug[controller_name, params[:id]])
 
     if @blog_post.update_attributes(blog_post_params)
-      Slug[controller_name, @blog_post.to_param] = @blog_post.id
 
       new_tags = params[:tags]
                      .to_s.downcase

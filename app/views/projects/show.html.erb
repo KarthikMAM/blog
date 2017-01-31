@@ -1,5 +1,5 @@
 <%- cache_unless logged_in?, @project do %>
-<%= render 'shared/errors' %>
+    <%= render 'shared/errors' %>
     <div class="row">
       <div class="col-md-8">
         <%= render 'shared/content', item: @project %>
@@ -7,6 +7,7 @@
       <div class="col-md-4">
         <hr>
         <%= render 'shared/admin_actions', item: @project %>
+        <%= render 'shared/search' %>
         <%= render 'links' %>
         <%= render 'shared/tags', tags: @project.project_tags.map { |e| e.tag } %>
       </div>
