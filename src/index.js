@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+function HelloWorld({name}) {
+  return <h1> Hello {name} </h1>;
+}
+
 ReactDOM.render(
-  <h1> Hello world </h1>,
+  <HelloWorld name="Karthik M A M" />,
   document.getElementById('root')
 );
