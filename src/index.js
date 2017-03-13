@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {HelloWorld} from './HelloWorld';
+import {AboutContainer} from './AboutContainer';
+import './styles.css';
 
 ReactDOM.render(
-  <HelloWorld />,
+  <AboutContainer />,
   document.getElementById('root')
 );

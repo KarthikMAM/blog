@@ -2,14 +2,17 @@
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module",
+    "ecmaVersion": 6,
     "ecmaFeatures": {
-      "jsx": true
+      "jsx": true,
+      "experimentalObjectRestSpread": true
     }
   },
   "env": {
     "node": true,
     "jasmine": true,
-    "es6": true
+    "es6": true,
+    "browser": true
   },
   "plugins": [
     "react"
@@ -17,6 +20,9 @@
   "rules": {
     "semi": "warn",
     "no-multiple-empty-lines": "warn",
-    "camelcase": "error"
+    "camelcase": "error",
+    "prefer-spread": "warn",
+    "no-undef-init": "error",
+    "no-undef": "error"
   }
 }

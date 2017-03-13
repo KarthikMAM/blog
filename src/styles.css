@@ -1,0 +1,15 @@
+* {
+  border-radius: 0% !important
+}
+
+.pic {
+  border-radius: 100% !important
+}
+
+.center {
+  text-align: center
+}
+
+.add-margin {
+  margin: 0px 2px
+}
