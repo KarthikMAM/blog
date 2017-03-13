@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function HelloWorld({name}) {
-  return <h1> Hello {name} </h1>;
-}
+import {HelloWorld} from './HelloWorld';
 
 ReactDOM.render(
   <HelloWorld name="Karthik M A M" />,
