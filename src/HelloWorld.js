@@ -1,5 +1,5 @@
 import React from 'react';
-import request from 'superagent';
+import { Api } from './Api';
 
 export class HelloWorld extends React.Component {
 
@@ -12,25 +12,11 @@ export class HelloWorld extends React.Component {
     };
   }
 
-  static propTypes = {
-    name: React.PropTypes.string
-  };
-
   componentDidMount() {
-    new Promise((resolve, reject) => {
-      request
-        .get('http://localhost:3000/about.json')
-        .end((err, res) => {
-          if (err || !res.ok) { reject(err); return; }
-
-          res = JSON.parse(res.text);
-
-          res.success ? resolve(res.payload) : reject(err);
-        });
-    }).then(
+    Api.getName().then(
       res => this.setState({ name: res.name, err: null }),
       err => this.setState({ err })
-      );
+    );
   }
 
   render() {
