@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { Api } from './Api';
-import { About } from './About';
-import { Error } from './Error';
+import { Api } from '../api';
+import {
+  About,
+  Error
+} from '../components';
 
 export class AboutContainer extends React.Component {
 
@@ -16,7 +18,7 @@ export class AboutContainer extends React.Component {
   }
 
   componentDidMount() {
-    Api.getName().then(
+    Api.getAbout().then(
       res => this.setState({ about: res, err: null }),
       err => this.setState({ err })
     );

@@ -1,6 +1,6 @@
 import request from 'superagent';
 
-function getName() {
+function getAbout() {
   return new Promise((resolve, reject) => {
     request
       .get('http://localhost:3000/about.json')
@@ -15,5 +15,5 @@ function getName() {
 }
 
 export const Api = {
-  getName
+  getAbout
 };

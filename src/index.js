@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {AboutContainer} from './AboutContainer';
-import './styles.css';
+import {About} from './containers';
+import './styles';
 
 ReactDOM.render(
-  <AboutContainer />,
+  <About />,
   document.getElementById('root')
 );
