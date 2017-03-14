@@ -1,15 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import { AboutContainer } from './AboutContainer';
+import { AboutContainer } from "./AboutContainer";
 import {
-  Home,
-  Error
-} from '../components';
+  Home
+} from "../components";
 
 export class HomeContainer extends AboutContainer {
   render() {
-    return this.state.err === null ?
-      <Home {...this.state.about} /> :
-      <Error content={"Error: " + JSON.stringify(this.state.err)} />;
+    return this.state.about === undefined ? null : <Home {...this.state.about} />;
   }
 }

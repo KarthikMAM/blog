@@ -1,5 +1,15 @@
 * {
-  border-radius: 0% !important
+  border-radius: 0% !important;
+  max-width: 100%;
+}
+
+.container {
+  margin-top: 50px
+}
+
+.row {
+  margin-left: 0px !important;
+  margin-right: 0px !important;
 }
 
 .pic {
@@ -18,4 +28,22 @@
 
 .add-top-margin {
   margin-top: 100px
+}
+
+.payload tr:first-child td {
+  border-top: 0;
+}
+.payload .payload-item td {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  vertical-align: middle !important;
+}
+.payload .payload-item td:first-child {
+  padding: 5px 5px 5px 0 !important;
+}
+.payload .payload-item td:last-child {
+  padding: 0px !important;
+}
+.payload .payload-item .admin-actions {
+  text-align: right;
 }

@@ -17,6 +17,10 @@
   "plugins": [
     "react"
   ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   "rules": {
     "semi": "warn",
     "no-multiple-empty-lines": "warn",
@@ -27,6 +31,8 @@
     "no-unreachable": "error",
     "no-extra-semi": "warn",
     "comma-style": "warn",
-    "comma-dangle": "warn"
+    "comma-dangle": "warn",
+    "quotes": "error",
+    "no-console": "off"
   }
 }

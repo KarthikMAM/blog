@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import { Social } from './Social';
-import { ButtonWell } from './ButtonWell';
+import { Social } from "./Social";
+import { ButtonWell } from "./ButtonWell";
 
 export function About({
   name,
@@ -20,9 +20,11 @@ export function About({
 
           {desc.map((item, index) => <p dangerouslySetInnerHTML={{ __html: item }} key={index} />)}
 
+          <br />
+
           <div className="list-group">
             <h4 className="list-group-heading">Projects</h4>
-            {projects.map(item => <a href={item.url} className="list-group-item">{item.name}</a>)}
+            {projects.map(item => <a key={item.name} href={item.url} className="list-group-item">{item.name}</a>)}
           </div>
         </div>
       </div>
@@ -39,3 +41,13 @@ export function About({
     </div>
   );
 }
+
+About.propTypes = {
+  name: React.PropTypes.string,
+  pic: React.PropTypes.string,
+  desc: React.PropTypes.array,
+  portfolio: React.PropTypes.array,
+  skills: React.PropTypes.array,
+  projects: React.PropTypes.array,
+  social: React.PropTypes.array
+};

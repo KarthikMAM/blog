@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { SearchWell } from '../components';
+import { SearchWell } from "../components";
 
 export class SearchContainer extends React.Component {
-  
+
   constructor(props) {
     super(props);
 
@@ -15,7 +15,7 @@ export class SearchContainer extends React.Component {
   }
 
   onChangeHandler() {
-    console.log('hello');
+    console.log("hello");
   }
 
   render() {

@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import { Api } from '../api';
-import { PayloadContent, ButtonWell } from '../components';
-import { SearchContainer } from './SearchContainer';
+import { Api } from "../api";
+import { PayloadContent, ButtonWell } from "../components";
+import { SearchContainer } from "./SearchContainer";
 
 export class PayloadContainer extends React.Component {
 
@@ -10,8 +10,7 @@ export class PayloadContainer extends React.Component {
     super(props);
 
     this.state = {
-      payload: undefined,
-      err: undefined
+      payload: undefined
     };
   }
 
@@ -22,22 +21,25 @@ export class PayloadContainer extends React.Component {
   }
 
   static defaultProps = {
-    payloadSubtype: 'items'
+    payloadSubtype: "items"
   }
 
   componentDidMount() {
-    Api.getPayload(`http://localhost:3000/${this.props.payloadType}/${this.props.payloadSubtype}/${this.props.query}.json`).then(
-      res => this.setState({ payload: res.payload, err: null }),
-      err => this.setState({ payload: undefined, err: JSON.stringify(err) })
-    );
+    Api.getPayload([
+      this.props.payloadType,
+      this.props.payloadSubtype,
+      this.props.query
+    ].join("/")
+    ).then(
+      res => this.setState({ payload: res.payload }),
+      err => console.log(err)
+      );
   }
 
   render() {
     let payload = this.state.payload; payload = payload !== undefined ? payload[0] : undefined;
 
-    console.log(payload);
-
-    return payload === undefined ? <h1> error </h1> : (
+    return payload === undefined ? null : (
       <div className="row">
         <div className="col-md-8">
           <PayloadContent {...{
@@ -53,21 +55,21 @@ export class PayloadContainer extends React.Component {
           <SearchContainer payloadType="Projects" />
 
           <ButtonWell {...{
-            title: 'Links',
+            title: "Links",
             buttons: [
-              { name: 'GitHub', url: `https://github.com/KarthikMAM/${payload.github}` },
-              { name: 'Issues', url: `https://github.com/KarthikMAM/${payload.github}/issues` },
-              { name: 'Release', url: `https://github.com/KarthikMAM/${payload.github}/release` },
-              { name: 'Live', url: `https://github.com/KarthikMAM/${payload.store}/release` }
-            ].filter(item => !item.url.includes('undefined') && !item.url.includes('null'))
+              { name: "GitHub", url: `https://github.com/KarthikMAM/${payload.github}` },
+              { name: "Issues", url: `https://github.com/KarthikMAM/${payload.github}/issues` },
+              { name: "Release", url: `https://github.com/KarthikMAM/${payload.github}/release` },
+              { name: "Live", url: `https://github.com/KarthikMAM/${payload.store}/release` }
+            ].filter(item => !item.url.includes("undefined") && !item.url.includes("null"))
           }} />
 
           <ButtonWell {...{
-            title: 'Tags',
+            title: "Tags",
             buttons: payload.tags.map(tag => ({ name: unescape(tag), url: `../tags/${tag}` }))
           }} />
         </div>
-        <div className='col-md-12'><hr /></div>
+        <div className="col-md-12"><hr /></div>
       </div>
     );
   }

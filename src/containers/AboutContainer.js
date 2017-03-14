@@ -1,10 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import { Api } from '../api';
-import {
-  About,
-  Error
-} from '../components';
+import { Api } from "../api";
+import { About } from "../components";
 
 export class AboutContainer extends React.Component {
 
@@ -12,21 +9,18 @@ export class AboutContainer extends React.Component {
     super(props);
 
     this.state = {
-      about: undefined,
-      err: undefined
+      about: undefined
     };
   }
 
   componentDidMount() {
     Api.getAbout().then(
-      res => this.setState({ about: res.payload, err: null }),
-      err => this.setState({ err })
+      res => this.setState({ about: res.payload }),
+      err => console.log(err)
     );
   }
 
   render() {
-    return this.state.err === null ?
-      <About {...this.state.about} /> :
-      <Error content={"Error: " + JSON.stringify(this.state.err)} />;
+    return this.state.about === undefined ? null : <About {...this.state.about} />;
   }
 }

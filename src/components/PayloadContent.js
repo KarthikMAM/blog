@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export function PayloadContent({
   title,
@@ -24,3 +24,10 @@ export function PayloadContent({
     </div>
   );
 }
+
+PayloadContent.propTypes = {
+  title: React.PropTypes.string,
+  createdAt: React.PropTypes.string,
+  desc: React.PropTypes.string,
+  content: React.PropTypes.string
+};

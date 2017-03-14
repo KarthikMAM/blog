@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 export function Social({
   items
@@ -8,10 +8,14 @@ export function Social({
       {
         items.map(item => (
           <a className="img-btn" key={item.name} href={item.url}>
-            <img width="30" src={item.logo} alt={item.name} />
+            <img src={item.logo} alt={item.name} />
           </a>
         ))
       }
     </div>
   );
 }
+
+Social.propTypes = {
+  items: React.PropTypes.array
+};

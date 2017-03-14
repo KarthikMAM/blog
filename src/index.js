@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
-import {Home, About, Payload} from './containers';
-import './styles';
+import { Home, About, Payload, PayloadList } from "./containers";
+import "./styles";
 
 ReactDOM.render(
-  <Payload {...{
-    payloadType: 'projects',
-    query: 'vallie-eichmann'
-  }}/>,
-  document.getElementById('root')
+  <PayloadList {...{
+    payloadType: "blog",
+    payloadSubtype: "index"
+  }} />,
+  document.getElementById("root")
 );

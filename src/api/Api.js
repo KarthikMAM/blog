@@ -1,11 +1,14 @@
-import request from 'superagent';
+import request from "superagent";
+
+const HOST = "http://localhost:3000";
 
 function getAbout() {
   return new Promise((resolve, reject) => {
     request
-      .get('http://localhost:3000/about.json')
+      .get(`${HOST}/about`)
+      .set("Accept", "application/json")
       .end((err, res) => {
-        if (err || !res.ok) { reject(err); return; }
+        if (err || !res.ok) reject(err);
 
         res = JSON.parse(res.text);
 
@@ -16,11 +19,12 @@ function getAbout() {
 
 function getPayload(target, query = {}) {
   return new Promise((resolve, reject) => {
-    request 
-      .get(target)
+    request
+      .get(`${HOST}/${target}`)
+      .set("Accept", "application/json")
       .query(query)
       .end((err, res) => {
-        if (err || !res.ok) { reject(err); return; }
+        if (err || !res.ok) reject(err);
 
         res = JSON.parse(res.text);
 
