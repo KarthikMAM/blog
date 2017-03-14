@@ -19,7 +19,7 @@ export class AboutContainer extends React.Component {
 
   componentDidMount() {
     Api.getAbout().then(
-      res => this.setState({ about: res, err: null }),
+      res => this.setState({ about: res.payload, err: null }),
       err => this.setState({ err })
     );
   }

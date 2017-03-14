@@ -26,7 +26,6 @@
     "no-undef": "error",
     "no-unreachable": "error",
     "no-extra-semi": "warn",
-    "no-extra-parens": "warn",
     "comma-style": "warn",
     "comma-dangle": "warn"
   }

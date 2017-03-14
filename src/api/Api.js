@@ -9,11 +9,27 @@ function getAbout() {
 
         res = JSON.parse(res.text);
 
-        res.success ? resolve(res.payload) : reject(err);
+        res.success ? resolve(res) : reject(err);
+      });
+  });
+}
+
+function getPayload(target, query = {}) {
+  return new Promise((resolve, reject) => {
+    request 
+      .get(target)
+      .query(query)
+      .end((err, res) => {
+        if (err || !res.ok) { reject(err); return; }
+
+        res = JSON.parse(res.text);
+
+        res.success ? resolve(res) : reject(err);
       });
   });
 }
 
 export const Api = {
-  getAbout
+  getAbout,
+  getPayload
 };
