@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router";
 
-import {Social} from "./Social";
+import { Social } from "./Social";
 
 export function Home({
   name,
@@ -12,7 +13,12 @@ export function Home({
       <h3> {name} </h3>
       <img src={pic} alt={name} className="pic" />
       <div className="navbar nav-pills">
-        {["Proects", "Blog", "About", "Contact"].map(menu => <a className="btn btn-default" key={menu} href="#">{menu}</a>)}
+        {[
+          "Projects",
+          "Blog",
+          "About",
+          "Contact"
+        ].map(menu => <Link className="btn btn-default" key={menu} to={menu.toLowerCase()}>{menu}</Link>)}
       </div>
       <Social items={social} />
     </div>

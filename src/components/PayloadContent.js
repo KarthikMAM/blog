@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router";
 
 export function PayloadContent({
   title,
@@ -10,7 +11,7 @@ export function PayloadContent({
     <div>
       <div className="page-header">
         <h1> {title} </h1>
-        <p className="lead"> by <a href="/">Karthik M A M</a></p>
+        <p className="lead"> by <Link to="/">Karthik M A M</Link></p>
       </div>
       <p><span className="glyphicon glyphicon-time"></span>{" " + createdAt}</p>
       <hr />

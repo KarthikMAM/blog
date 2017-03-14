@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 import { Social } from "./Social";
 import { ButtonWell } from "./ButtonWell";
@@ -24,7 +25,7 @@ export function About({
 
           <div className="list-group">
             <h4 className="list-group-heading">Projects</h4>
-            {projects.map(item => <a key={item.name} href={item.url} className="list-group-item">{item.name}</a>)}
+            {projects.map(item => <Link key={item.name} to={item.url} className="list-group-item">{item.name}</Link>)}
           </div>
         </div>
       </div>

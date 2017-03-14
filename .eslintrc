@@ -32,7 +32,8 @@
     "no-extra-semi": "warn",
     "comma-style": "warn",
     "comma-dangle": "warn",
-    "quotes": "error",
+    "no-unused-vars": "warn",
+    "quotes": "warn",
     "no-console": "off"
   }
 }

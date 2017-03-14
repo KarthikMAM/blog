@@ -20,7 +20,7 @@ function getAbout() {
 function getPayload(target, query = {}) {
   return new Promise((resolve, reject) => {
     request
-      .get(`${HOST}/${target}`)
+      .get(`${HOST}/${escape(target)}`)
       .set("Accept", "application/json")
       .query(query)
       .end((err, res) => {

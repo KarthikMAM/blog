@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router";
 
 export function PayloadListItem({
   name,
@@ -10,14 +11,14 @@ export function PayloadListItem({
   return (
     <tr className="payload-item">
       <td>
-        <h3><a href={showPath}>{name}</a></h3>
+        <h3><Link to={showPath}>{name}</Link></h3>
         <h5><span className="glyphicon glyphicon-time" />{` ${createdAt}`}</h5>
         <p>{desc}</p>
       </td>
       {
         editPath === null ? null : (
           <td className="admin-actions">
-            <a className="btn btn-danger" href={editPath}>Edit</a>
+            <Link className="btn btn-danger" to={editPath}>Edit</Link>
           </td>
         )
       }
