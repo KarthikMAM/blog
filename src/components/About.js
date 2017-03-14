@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Social } from './Social';
+import { ButtonWell } from './ButtonWell';
 
 export function About({
   name,
@@ -28,15 +29,8 @@ export function About({
 
       <div className="col-md-4">
 
-        <div className="well">
-          <h4>Portfolio:</h4>
-          {portfolio.map(item => <a key={item.name} className="btn btn-primary" href={item.url}>{item.name}</a>)}
-        </div>
-
-        <div className="well">
-          <h4>Skills:</h4>
-          {skills.map(item => <a key={item.name} className="btn btn-primary" href={item.url}>{item.name}</a>)}
-        </div>
+        <ButtonWell buttons={portfolio} title="Portfolio" />
+        <ButtonWell buttons={skills} title="Skills" />
 
         <div className="well center">
           <Social items={social} />

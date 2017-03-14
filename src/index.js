@@ -5,6 +5,6 @@ import {Home, About} from './containers';
 import './styles';
 
 ReactDOM.render(
-  <About />,
+  <Home />,
   document.getElementById('root')
 );
