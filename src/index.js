@@ -16,7 +16,8 @@ ReactDOM.render(
       <IndexRoute component={({ params, location }) => <PayloadList {...{
         payloadType: params.payloadType,
         payloadSubtype: "index",
-        page: location.query.page === undefined ? 1 : parseInt(location.query.page)
+        page: location.query.page === undefined ? 1 : parseInt(location.query.page, 10),
+        location
       }} />} />
       <Route path="items/:query" component={({ params }) => <Payload {...{
         payloadType: params.payloadType,
@@ -27,9 +28,10 @@ ReactDOM.render(
         payloadType: params.payloadType,
         payloadSubtype: "tags",
         query: params.query,
-        page: location.query.page === undefined ? 1 : parseInt(location.query.page)
+        page: location.query.page === undefined ? 1 : parseInt(location.query.page, 10),
+        location
       }} />} />
-      
+
     </Route>
   </Router>,
   document.getElementById("root")

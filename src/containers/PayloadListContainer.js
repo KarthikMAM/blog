@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Api } from "../api";
-import { PayloadListItem } from "../components";
+import { PayloadListItem, Pagination } from "../components";
 
 export class PayloadListContainer extends React.Component {
 
@@ -9,7 +9,8 @@ export class PayloadListContainer extends React.Component {
     super(props);
 
     this.state = {
-      payload: []
+      payload: [],
+      payloadPages: 1
     };
   }
 
@@ -17,7 +18,8 @@ export class PayloadListContainer extends React.Component {
     payloadType: React.PropTypes.string.isRequired,
     payloadSubtype: React.PropTypes.string.isRequired,
     query: React.PropTypes.string,
-    page: React.PropTypes.number
+    page: React.PropTypes.number,
+    location: React.PropTypes.object.isRequired
   }
 
   static defaultProps = {
@@ -28,12 +30,16 @@ export class PayloadListContainer extends React.Component {
   }
 
   componentDidMount() {
+    this.componentWillReceiveProps(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
     Api.getPayload([
-      this.props.payloadType,
-      this.props.payloadSubtype,
-      this.props.query
-    ].filter(item => item !== undefined).join("/"), { page: this.props.page }).then(
-      res => this.setState({ payload: res.payload }),
+      nextProps.payloadType,
+      nextProps.payloadSubtype,
+      nextProps.query
+    ].filter(item => item !== undefined).join("/"), { page: nextProps.page }).then(
+      res => this.setState({ payload: res.payload, payloadPages: res.payloadPages }),
       err => console.log(err)
       );
   }
@@ -52,10 +58,16 @@ export class PayloadListContainer extends React.Component {
             ].filter(item => item !== "undefined").join(" - ").toUpperCase()}
           </h3>
 
+          <Pagination {...{
+            location: this.props.location,
+            currentPage: this.props.page,
+            pageCount: this.state.payloadPages
+          }} />
+
           <table className="table payload">
             <tbody>
               {
-                payload.map(payloadItem => <PayloadListItem key={payloadItem.id} {...{
+                payload.map(payloadItem => <PayloadListItem key={payloadItem.slug} {...{
                   name: payloadItem.name,
                   showPath: payloadItem.links.path,
                   editPath: payloadItem.links.edit,
@@ -65,6 +77,12 @@ export class PayloadListContainer extends React.Component {
               }
             </tbody>
           </table>
+
+          <Pagination {...{
+            location: this.props.location,
+            currentPage: this.props.page,
+            pageCount: this.state.payloadPages
+          }} />
         </div>
       </div>
     );
