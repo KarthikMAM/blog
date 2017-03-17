@@ -33,7 +33,18 @@ function getPayload(target, query = {}) {
   });
 }
 
+function getSearch(type, q) {
+  return new Promise((resolve, reject) => {
+    request
+      .get(`${HOST}/search`)
+      .set("Accept", "application/json")
+      .query({ type, q })
+      .end((err, res) => res.ok ? resolve(JSON.parse(res.text)) : reject(err));
+  });
+}
+
 export const Api = {
   getAbout,
-  getPayload
+  getPayload,
+  getSearch
 };

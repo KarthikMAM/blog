@@ -2,6 +2,7 @@ import React from "react";
 
 import { Api } from "../api";
 import { PayloadListItem, Pagination } from "../components";
+import { SearchContainer } from "./SearchContainer";
 
 export class PayloadListContainer extends React.Component {
 
@@ -83,6 +84,10 @@ export class PayloadListContainer extends React.Component {
             currentPage: this.props.page,
             pageCount: this.state.payloadPages
           }} />
+        </div>
+
+        <div className="col-md-4">
+          <SearchContainer payloadType={this.props.payloadType} />
         </div>
       </div>
     );

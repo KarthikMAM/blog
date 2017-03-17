@@ -25,10 +25,14 @@ export class PayloadContainer extends React.Component {
   }
 
   componentDidMount() {
+    this.componentWillReceiveProps(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
     Api.getPayload([
-      this.props.payloadType,
-      this.props.payloadSubtype,
-      this.props.query
+      nextProps.payloadType,
+      nextProps.payloadSubtype,
+      nextProps.query
     ].join("/")
     ).then(
       res => this.setState({ payload: res.payload }),
@@ -52,7 +56,7 @@ export class PayloadContainer extends React.Component {
           <hr />
         </div>
         <div className="col-md-4">
-          <SearchContainer payloadType="Projects" />
+          <SearchContainer payloadType={this.props.payloadType} />
 
           <ButtonWell {...{
             title: "Links",
