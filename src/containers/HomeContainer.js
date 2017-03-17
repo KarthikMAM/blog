@@ -1,12 +1,29 @@
 import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import _ from "underscore";
 
-import { AboutContainer } from "./AboutContainer";
-import {
-  Home
-} from "../components";
+import { loadAbout } from "../actions";
+import { Home, Loading } from "../components";
 
-export class HomeContainer extends AboutContainer {
+class HomeContainer extends React.Component {
+  static propTypes = {
+    about: React.PropTypes.object,
+    load: React.PropTypes.func
+  }
+
+  componentDidMount() {
+    _.isEmpty(this.props.about) && this.props.load();
+  }
+
   render() {
-    return this.state.about === undefined ? null : <Home {...this.state.about} />;
+    return _.isEmpty(this.props.about) ? <Loading /> : <Home about={this.props.about} />;
   }
 }
+
+let connector = connect(
+  state => ({ about: state.about }),
+  dispatch => ({ load: bindActionCreators(loadAbout, dispatch) })
+)(HomeContainer);
+
+export { connector as HomeContainer };

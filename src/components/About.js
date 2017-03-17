@@ -4,39 +4,31 @@ import { Link } from "react-router";
 import { Social } from "./Social";
 import { ButtonWell } from "./ButtonWell";
 
-export function About({
-  name,
-  pic,
-  desc,
-  portfolio,
-  skills,
-  projects,
-  social
-}) {
+export function About({ about }) {
   return (
     <div className="row">
       <div className="col-md-8">
         <div className="center">
-          <img src={pic} alt={name} className="pic" />
+          {/*<img src={about.pic} alt={about.name} className="pic" />*/}
 
-          {desc.map((item, index) => <p dangerouslySetInnerHTML={{ __html: item }} key={index} />)}
+          {about.desc.map((item, index) => <p dangerouslySetInnerHTML={{ __html: item }} key={index} />)}
 
           <br />
 
           <div className="list-group">
             <h4 className="list-group-heading">Projects</h4>
-            {projects.map(item => <Link key={item.name} to={item.url} className="list-group-item">{item.name}</Link>)}
+            {about.projects.map(item => <Link key={item.name} to={item.url} className="list-group-item">{item.name}</Link>)}
           </div>
         </div>
       </div>
 
       <div className="col-md-4">
 
-        <ButtonWell buttons={portfolio} title="Portfolio" />
-        <ButtonWell buttons={skills} title="Skills" />
+        <ButtonWell buttons={about.portfolio} title="Portfolio" />
+        <ButtonWell buttons={about.skills} title="Skills" />
 
         <div className="well center">
-          <Social items={social} />
+          <Social items={about.social} />
         </div>
       </div>
     </div>
@@ -44,11 +36,13 @@ export function About({
 }
 
 About.propTypes = {
-  name: React.PropTypes.string,
-  pic: React.PropTypes.string,
-  desc: React.PropTypes.array,
-  portfolio: React.PropTypes.array,
-  skills: React.PropTypes.array,
-  projects: React.PropTypes.array,
-  social: React.PropTypes.array
+  about: React.PropTypes.shape({
+    name: React.PropTypes.string,
+    pic: React.PropTypes.string,
+    desc: React.PropTypes.array,
+    portfolio: React.PropTypes.array,
+    skills: React.PropTypes.array,
+    projects: React.PropTypes.array,
+    social: React.PropTypes.array
+  })
 };

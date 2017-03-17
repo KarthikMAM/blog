@@ -1,26 +1,29 @@
 import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import _ from "underscore";
 
-import { Api } from "../api";
-import { About } from "../components";
+import { loadAbout } from "../actions";
+import { About, Loading } from "../components";
 
-export class AboutContainer extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      about: undefined
-    };
+class AboutContainer extends React.Component {
+  static propTypes = {
+    about: React.PropTypes.object,
+    load: React.PropTypes.func
   }
 
   componentDidMount() {
-    Api.getAbout().then(
-      res => this.setState({ about: res.payload }),
-      err => console.log(err)
-    );
+    _.isEmpty(this.props.about) && this.props.load();
   }
 
   render() {
-    return this.state.about === undefined ? null : <About {...this.state.about} />;
+    return _.isEmpty(this.props.about) ? <Loading /> : <About about={this.props.about} />;
   }
 }
+
+let connector = connect(
+  state => ({ about: state.about }),
+  dispatch => ({ load: bindActionCreators(loadAbout, dispatch) })
+)(AboutContainer);
+
+export { connector as AboutContainer };

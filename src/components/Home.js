@@ -3,15 +3,11 @@ import { Link } from "react-router";
 
 import { Social } from "./Social";
 
-export function Home({
-  name,
-  pic,
-  social
-}) {
+export function Home({ about }) {
   return (
     <div className="middle center" style={{ alignContent: "center" }}>
-      <h3> {name} </h3>
-      <img src={pic} alt={name} className="pic" />
+      <h3> {about.name} </h3>
+      {/*<img src={about.pic} alt={about.name} className="pic" />*/}
       <div className="navbar nav-pills">
         {[
           "Projects",
@@ -20,13 +16,15 @@ export function Home({
           "Contact"
         ].map(menu => <Link className="btn btn-default" key={menu} to={menu.toLowerCase()}>{menu}</Link>)}
       </div>
-      <Social items={social} />
+      <Social items={about.social} />
     </div>
   );
 }
 
 Home.propTypes = {
-  name: React.PropTypes.string,
-  pic: React.PropTypes.string,
-  social: React.PropTypes.array
+  about: React.PropTypes.shape({
+    name: React.PropTypes.string,
+    pic: React.PropTypes.string,
+    social: React.PropTypes.array
+  })
 };
