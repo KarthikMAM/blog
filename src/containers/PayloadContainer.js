@@ -1,23 +1,19 @@
 import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import _ from "underscore";
 
-import { Api } from "../api";
-import { PayloadContent, ButtonWell } from "../components";
+import { PayloadContent, ButtonWell, Loading } from "../components";
 import { SearchContainer } from "./SearchContainer";
+import { loadPayload } from "../actions";
 
-export class PayloadContainer extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      payload: undefined
-    };
-  }
-
+class PayloadContainer extends React.Component {
   static propTypes = {
+    payload: React.PropTypes.object,
     payloadType: React.PropTypes.string.isRequired,
-    payloadSubtype: React.PropTypes.string.isRequired,
-    query: React.PropTypes.string.isRequired
+    payloadSubtype: React.PropTypes.string,
+    query: React.PropTypes.string.isRequired,
+    loadPayload: React.PropTypes.func
   }
 
   static defaultProps = {
@@ -29,21 +25,17 @@ export class PayloadContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    Api.getPayload([
-      nextProps.payloadType,
-      nextProps.payloadSubtype,
-      nextProps.query
-    ].join("/")
-    ).then(
-      res => this.setState({ payload: res.payload }),
-      err => console.log(err)
-      );
+    _.isEmpty(nextProps.payload) && nextProps.loadPayload({
+      payloadType: nextProps.payloadType,
+      payloadSubtype: nextProps.payloadSubtype,
+      query: nextProps.query
+    });
   }
 
   render() {
-    let payload = this.state.payload; payload = payload !== undefined ? payload[0] : undefined;
+    let payload = this.props.payload;
 
-    return payload === undefined ? null : (
+    return _.isEmpty(payload) ? <Loading /> : (
       <div className="row">
         <div className="col-md-8">
           <PayloadContent {...{
@@ -64,8 +56,8 @@ export class PayloadContainer extends React.Component {
               { name: "GitHub", url: `https://github.com/KarthikMAM/${payload.github}` },
               { name: "Issues", url: `https://github.com/KarthikMAM/${payload.github}/issues` },
               { name: "Release", url: `https://github.com/KarthikMAM/${payload.github}/release` },
-              { name: "Live", url: `https://github.com/KarthikMAM/${payload.store}/release` }
-            ].filter(item => !item.url.includes("undefined") && !item.url.includes("null"))
+              { name: "Live", url: payload.store }
+            ].filter(item => item.url && !item.url.includes("undefined"))
           }} />
 
           <ButtonWell {...{
@@ -78,3 +70,14 @@ export class PayloadContainer extends React.Component {
     );
   }
 }
+
+let connector = connect(
+  (state, ownProps) => ({
+    payload: state[ownProps.payloadType] &&
+    state[ownProps.payloadType]["items"] &&
+    state[ownProps.payloadType]["items"][ownProps.query]
+  }),
+  dispatch => ({ loadPayload: bindActionCreators(loadPayload, dispatch) })
+)(PayloadContainer);
+
+export { connector as PayloadContainer };

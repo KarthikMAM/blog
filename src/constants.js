@@ -10,6 +10,9 @@ export const PAYLOAD_SUBTYPE_ITEMS = "items";
 export const PAYLOAD_SUBTYPE_PAGES = "pages";
 export const PAYLOAD_SUBTYPE_SEARCH = "search";
 
+export const NEW_ERROR = "NEW_ERROR";
+export const CLEAR_ERROR = "CLEAR_ERROR";
+
 export const INITIAL_STATE = {
   [PAYLOAD_TYPE_ABOUT]: {},
   [PAYLOAD_TYPE_PROJECTS]: {
@@ -21,5 +24,6 @@ export const INITIAL_STATE = {
     [PAYLOAD_SUBTYPE_SEARCH]: {},
     [PAYLOAD_SUBTYPE_ITEMS]: {},
     [PAYLOAD_SUBTYPE_PAGES]: {}
-  }
+  },
+  error: []
 };

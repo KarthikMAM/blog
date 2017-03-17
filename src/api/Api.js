@@ -12,7 +12,7 @@ function getAbout() {
 
         res = JSON.parse(res.text);
 
-        res.success ? resolve(res) : reject(err);
+        res.success ? resolve(res) : reject(res.error);
       });
   });
 }
@@ -26,9 +26,9 @@ function getPayload(target, query = {}) {
       .end((err, res) => {
         if (err || !res.ok) reject(err);
 
-        res = JSON.parse(res.text);
+        res = res.ok && JSON.parse(res.text);
 
-        res.success ? resolve(res) : reject(err);
+        res.success ? resolve(res) : reject(res.error);
       });
   });
 }
@@ -39,7 +39,7 @@ function getSearch(type, q) {
       .get(`${HOST}/search`)
       .set("Accept", "application/json")
       .query({ type, q })
-      .end((err, res) => res.ok ? resolve(JSON.parse(res.text)) : reject(err));
+      .end((err, res) => res.ok ? resolve(JSON.parse(res.text)) : reject(["search", "Unable to find search query"]));
   });
 }
 

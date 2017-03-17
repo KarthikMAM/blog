@@ -1,32 +1,25 @@
 import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import _ from "underscore";
 
-import { Api } from "../api";
-import { PayloadListItem, Pagination } from "../components";
+import { PayloadListItem, Pagination, Loading } from "../components";
 import { SearchContainer } from "./SearchContainer";
+import { loadPayload } from "../actions";
 
-export class PayloadListContainer extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      payload: [],
-      payloadPages: 1
-    };
-  }
-
+class PayloadListContainer extends React.Component {
   static propTypes = {
     payloadType: React.PropTypes.string.isRequired,
     payloadSubtype: React.PropTypes.string.isRequired,
     query: React.PropTypes.string,
     page: React.PropTypes.number,
-    location: React.PropTypes.object.isRequired
+    location: React.PropTypes.object.isRequired,
+    payload: React.PropTypes.array,
+    loadPayload: React.PropTypes.func,
+    payloadPageCount: React.PropTypes.number
   }
 
   static defaultProps = {
-    payloadType: "projects",
-    payloadSubtype: "index",
-    query: undefined,
     page: 1
   }
 
@@ -35,20 +28,16 @@ export class PayloadListContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    Api.getPayload([
-      nextProps.payloadType,
-      nextProps.payloadSubtype,
-      nextProps.query
-    ].filter(item => item !== undefined).join("/"), { page: nextProps.page }).then(
-      res => this.setState({ payload: res.payload, payloadPages: res.payloadPages }),
-      err => console.log(err)
-      );
+    _.isEmpty(nextProps.payload) && nextProps.loadPayload({
+      payloadType: nextProps.payloadType,
+      payloadSubtype: "pages",
+      query: nextProps.query || "index",
+      page: nextProps.page
+    });
   }
 
   render() {
-    let payload = this.state.payload;
-
-    return (
+    return _.isEmpty(this.props.payload) ? <Loading /> : (
       <div className="row">
         <div className="col-md-8">
           <h3>
@@ -62,13 +51,13 @@ export class PayloadListContainer extends React.Component {
           <Pagination {...{
             location: this.props.location,
             currentPage: this.props.page,
-            pageCount: this.state.payloadPages
+            pageCount: this.props.payloadPageCount
           }} />
 
           <table className="table payload">
             <tbody>
               {
-                payload.map(payloadItem => <PayloadListItem key={payloadItem.slug} {...{
+                this.props.payload.map(payloadItem => <PayloadListItem key={payloadItem.slug} {...{
                   name: payloadItem.name,
                   showPath: payloadItem.links.path,
                   editPath: payloadItem.links.edit,
@@ -82,7 +71,7 @@ export class PayloadListContainer extends React.Component {
           <Pagination {...{
             location: this.props.location,
             currentPage: this.props.page,
-            pageCount: this.state.payloadPages
+            pageCount: this.props.payloadPageCount
           }} />
         </div>
 
@@ -94,3 +83,25 @@ export class PayloadListContainer extends React.Component {
     );
   }
 }
+
+let connector = connect(
+  (state, ownProps) => ({
+    payload: (
+      state[ownProps.payloadType] &&
+      state[ownProps.payloadType]["pages"][ownProps.query || "index"] &&
+      state[ownProps.payloadType]["pages"][ownProps.query || "index"][ownProps.page] &&
+      _.filter(
+        state[ownProps.payloadType]["items"],
+        (item) => state[ownProps.payloadType]["pages"][ownProps.query || "index"][ownProps.page].includes(item.slug)
+      )
+    ),
+    payloadPageCount: parseInt(
+      state[ownProps.payloadType] &&
+      state[ownProps.payloadType]["pages"][ownProps.query || "index"] &&
+      state[ownProps.payloadType]["pages"][ownProps.query || "index"].pageCount, 10
+    )
+  }),
+  dispatch => ({ loadPayload: bindActionCreators(loadPayload, dispatch) })
+)(PayloadListContainer);
+
+export { connector as PayloadListContainer };

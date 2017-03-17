@@ -2,9 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { IndexRoute, Router, Route, browserHistory } from "react-router";
+import { newError } from "./actions";
 
 import { store } from "./store";
-import { Home, About, Payload, PayloadList } from "./containers";
+import { Home, About, Payload, PayloadList, Error } from "./containers";
 import "./styles";
 
 ReactDOM.render(
@@ -15,7 +16,7 @@ ReactDOM.render(
       <Route path="home" component={Home} />
       <Route path="contact" component={Home} />
 
-      <Route path=":payloadType">
+      <Route path=":payloadType" component={Error}>
         <IndexRoute component={({ params, location }) => <PayloadList {...{
           payloadType: params.payloadType,
           payloadSubtype: "index",
@@ -35,7 +36,7 @@ ReactDOM.render(
           page: location.query.page === undefined ? 1 : parseInt(location.query.page, 10),
           location
         }} />} />
-
+        <Route path="*" onEnter={() => { store.dispatch(newError([["Error", "Page not found"]])); }} />
       </Route>
     </Router>
   </Provider>,
