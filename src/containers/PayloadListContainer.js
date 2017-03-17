@@ -87,6 +87,7 @@ export class PayloadListContainer extends React.Component {
         </div>
 
         <div className="col-md-4">
+          <hr />
           <SearchContainer payloadType={this.props.payloadType} />
         </div>
       </div>

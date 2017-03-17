@@ -70,7 +70,7 @@ export class PayloadContainer extends React.Component {
 
           <ButtonWell {...{
             title: "Tags",
-            buttons: payload.tags.map(tag => ({ name: unescape(tag), url: `../tags/${tag}` }))
+            buttons: payload.tags.map(tag => ({ name: unescape(tag), url: `/${this.props.payloadType}/tags/${tag}` }))
           }} />
         </div>
         <div className="col-md-12"><hr /></div>

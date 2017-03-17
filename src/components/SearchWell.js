@@ -11,7 +11,7 @@ export function SearchWell({
     <div className="well">
       <h4>Search</h4>
       <div className="input-group">
-        <input onKeyPress={e => e.key == "Enter" && onClickHandler(e, q.value)} ref={input => q = input} type="text" className="form-control" autoComplete={false} placeholder={placeholder} onChange={onChangeHandler} list="suggestions" />
+        <input onKeyPress={e => e.key === "Enter" && onClickHandler(e, q.value)} ref={input => q = input} type="text" className="form-control" autoComplete={false} placeholder={placeholder} onChange={onChangeHandler} list="suggestions" />
         <datalist id="suggestions">
           {searchResults && searchResults.map(item => <option value={item} key={item} />)}
         </datalist>
