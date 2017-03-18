@@ -1,6 +1,6 @@
 import request from "superagent";
 
-const HOST = "http://localhost:3000";
+const HOST = "/api";
 
 function getAbout() {
   return new Promise((resolve, reject) => {
