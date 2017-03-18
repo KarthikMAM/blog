@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Header } from "./components";
-import { Error } from "./containers";
+import { Status } from "./containers";
 
 export class App extends React.Component {
   static propTypes = {
@@ -13,13 +13,13 @@ export class App extends React.Component {
   render() {
     return (
       <div>
-        { this.props.params.payloadType && <Header activePath={this.props.location.pathname} /> }
+        <Status />
 
-        <Error>
-          <div className="container">
-            {this.props.children}
-          </div>
-        </Error>
+        {this.props.location.pathname !== "/" && <Header activePath={this.props.location.pathname} />}
+
+        <div className="container">
+          {this.props.children}
+        </div>
       </div >
     );
   }

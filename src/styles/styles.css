@@ -47,15 +47,3 @@ body {
 .payload .payload-item .admin-actions {
   text-align: right;
 }
-
-.middle-parent {
-  display: table; 
-  width: 100%; 
-  height: 100%;
-}
-
-.middle-child {
-  display: table-cell; 
-  vertical-align: middle; 
-  text-align: center;
-}

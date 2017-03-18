@@ -19,7 +19,8 @@
   ],
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "react-app"
   ],
   "rules": {
     "semi": "warn",
