@@ -63,7 +63,7 @@ class PayloadListContainer extends React.Component {
               {
                 this.props.payload.map(payloadItem => <PayloadListItem key={payloadItem.slug} {...{
                   name: payloadItem.name,
-                  showPath: payloadItem.links.path,
+                  showPath: payloadItem.links.path.replace("/api", ""),
                   editPath: payloadItem.links.edit,
                   createdAt: payloadItem.createdAt,
                   desc: payloadItem.desc

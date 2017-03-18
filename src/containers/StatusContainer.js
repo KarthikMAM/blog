@@ -23,8 +23,8 @@ class StatusContainer extends React.Component {
     if (!_.isEmpty(nextProps.error)) {
       setTimeout(() => browserHistory.push({
         pathname: (
-          browserHistory.getCurrentLocation().pathname.includes("/projects") ? "/projects" :
-            browserHistory.getCurrentLocation().pathname.includes("/blog") ? "/blog" :
+          browserHistory.getCurrentLocation().pathname.includes("/projects/") ? "/projects" :
+            browserHistory.getCurrentLocation().pathname.includes("/blog/") ? "/blog" :
               "/"
         )
       }), 1000);

@@ -16,7 +16,7 @@ export function ButtonWell({ buttons, title }) {
         {
           key: item.name,
           className: "btn btn-primary",
-          to: item.url,
+          to: item.url.replace("/api/", "/"),
           href: item.url,
           children: item.name
         }
