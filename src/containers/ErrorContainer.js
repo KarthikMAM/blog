@@ -5,7 +5,6 @@ import _ from "underscore";
 import { browserHistory } from "react-router";
 
 import { clearError } from "../actions";
-import { Loading } from "../components";
 
 class ErrorContainer extends React.Component {
   static propTypes = {
@@ -37,7 +36,7 @@ class ErrorContainer extends React.Component {
   render() {
     return (
       <div>
-        {this.props.children || <Loading />}
+        {this.props.children}
       </div>
     );
   }

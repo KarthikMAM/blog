@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router";
 
-export function ButtonWell({
-  buttons,
-  title
-}) {
+export function ButtonWell({ buttons, title }) {
+
+  ButtonWell.propTypes = {
+    buttons: React.PropTypes.array.isRequired,
+    title: React.PropTypes.string
+  };
+
   return (buttons === undefined || buttons.length === 0 ? null : (
     <div className="well">
       <h4>{title}</h4>
@@ -21,8 +24,3 @@ export function ButtonWell({
     </div>
   ));
 }
-
-ButtonWell.propTypes = {
-  buttons: React.PropTypes.array.isRequired,
-  title: React.PropTypes.string
-};

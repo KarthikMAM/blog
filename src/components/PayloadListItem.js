@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router";
 
-export function PayloadListItem({
-  name,
-  createdAt,
-  desc,
-  showPath,
-  editPath
-}) {
+export function PayloadListItem({ name, createdAt, desc, showPath, editPath }) {
+  PayloadListItem.propTypes = {
+    name: React.PropTypes.string,
+    createdAt: React.PropTypes.string,
+    desc: React.PropTypes.string,
+    showPath: React.PropTypes.string,
+    editPath: React.PropTypes.string
+  };
+
   return (
     <tr className="payload-item">
       <td>
@@ -25,11 +27,3 @@ export function PayloadListItem({
     </tr>
   );
 }
-
-PayloadListItem.propTypes = {
-  name: React.PropTypes.string,
-  createdAt: React.PropTypes.string,
-  desc: React.PropTypes.string,
-  showPath: React.PropTypes.string,
-  editPath: React.PropTypes.string
-};

@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router";
 
-export function Pagination({
-  location,
-  currentPage = 1,
-  pageCount = 1
-}) {
+export function Pagination({ location, currentPage = 1, pageCount = 1 }) {
+  Pagination.propTypes = {
+    location: React.PropTypes.object,
+    currentPage: React.PropTypes.number,
+    pageCount: React.PropTypes.number
+  };
+  
   return (
     <div className="pagination">
       <ul className="pagination">
@@ -32,9 +34,3 @@ export function Pagination({
     </div>
   );
 }
-
-Pagination.propTypes = {
-  location: React.PropTypes.object,
-  currentPage: React.PropTypes.number,
-  pageCount: React.PropTypes.number
-};

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import _ from "underscore";
 
-import { PayloadContent, ButtonWell, Loading } from "../components";
+import { PayloadContent, ButtonWell } from "../components";
 import { SearchContainer } from "./SearchContainer";
 import { loadPayload } from "../actions";
 
@@ -35,7 +35,7 @@ class PayloadContainer extends React.Component {
   render() {
     let payload = this.props.payload;
 
-    return _.isEmpty(payload) ? <Loading /> : (
+    return _.isEmpty(payload) ? <span /> : (
       <div className="row">
         <div className="col-md-8">
           <PayloadContent {...{
@@ -44,10 +44,10 @@ class PayloadContainer extends React.Component {
             desc: payload.desc,
             content: payload.content
           }} />
-
-          <hr />
         </div>
         <div className="col-md-4">
+          <hr />
+
           <SearchContainer payloadType={this.props.payloadType} />
 
           <ButtonWell {...{

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import _ from "underscore";
 
 import { loadAbout } from "../actions";
-import { Home, Loading } from "../components";
+import { Home } from "../components";
 
 class HomeContainer extends React.Component {
   static propTypes = {
@@ -17,7 +17,7 @@ class HomeContainer extends React.Component {
   }
 
   render() {
-    return _.isEmpty(this.props.about) ? <Loading /> : <Home about={this.props.about} />;
+    return _.isEmpty(this.props.about) ? <span /> : <Home about={this.props.about} />;
   }
 }
 

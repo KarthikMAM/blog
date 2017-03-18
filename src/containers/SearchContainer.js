@@ -36,7 +36,7 @@ export class SearchContainer extends React.Component {
   }
 
   onClickHandler(e, item) {
-    browserHistory.push(`/${this.props.payloadType.replace("blog", "blog_posts")}/items/${item}`);
+    browserHistory.push(`/${this.props.payloadType}/items/${item}`);
   }
 
   render() {

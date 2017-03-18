@@ -28,6 +28,8 @@ export function loadPayloadFailure(error) {
 
 export function loadAbout() {
   return (dispatch) => {
+    dispatch(loadPayloadStart());
+
     Api.getAbout().then(
       res => dispatch(loadPayloadSuccess({ ...res })),
       err => dispatch(loadPayloadFailure(err))
@@ -64,6 +66,8 @@ function handlePayload({ dispatch, payload, payloadPages, payloadType, payloadSu
 
 export function loadPayload({ payloadType, payloadSubtype, query, page }) {
   return (dispatch) => {
+    dispatch(loadPayloadStart());
+    
     Api.getPayload([
       payloadType,
       payloadSubtype !== "pages" ? payloadSubtype : undefined,

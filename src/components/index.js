@@ -6,3 +6,4 @@ export { ButtonWell } from "./ButtonWell";
 export { PayloadListItem } from "./PayloadListItem";
 export { Loading } from "./Loading";
 export { Pagination } from "./Pagination";
+export { Header } from "./Header";

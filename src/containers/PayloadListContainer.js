@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import _ from "underscore";
 
-import { PayloadListItem, Pagination, Loading } from "../components";
+import { PayloadListItem, Pagination } from "../components";
 import { SearchContainer } from "./SearchContainer";
 import { loadPayload } from "../actions";
 
@@ -27,6 +27,10 @@ class PayloadListContainer extends React.Component {
     this.componentWillReceiveProps(this.props);
   }
 
+  shouldComponentUpdate(nextProps) {
+    return !_.isEmpty(nextProps.payload);
+  }
+
   componentWillReceiveProps(nextProps) {
     _.isEmpty(nextProps.payload) && nextProps.loadPayload({
       payloadType: nextProps.payloadType,
@@ -37,7 +41,7 @@ class PayloadListContainer extends React.Component {
   }
 
   render() {
-    return _.isEmpty(this.props.payload) ? <Loading /> : (
+    return _.isEmpty(this.props.payload) ? <span /> : (
       <div className="row">
         <div className="col-md-8">
           <h3>

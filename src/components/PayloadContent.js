@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router";
 
-export function PayloadContent({
-  title,
-  createdAt,
-  desc,
-  content
-}) {
+export function PayloadContent({ title, createdAt, desc, content }) {
+  PayloadContent.propTypes = {
+    title: React.PropTypes.string,
+    createdAt: React.PropTypes.string,
+    desc: React.PropTypes.string,
+    content: React.PropTypes.string
+  };
+
   return (
     <div>
       <div className="page-header">
@@ -25,10 +27,3 @@ export function PayloadContent({
     </div>
   );
 }
-
-PayloadContent.propTypes = {
-  title: React.PropTypes.string,
-  createdAt: React.PropTypes.string,
-  desc: React.PropTypes.string,
-  content: React.PropTypes.string
-};

@@ -1,12 +1,14 @@
 import React from "react";
 
-export function SearchWell({
-  onChangeHandler,
-  onClickHandler,
-  searchResults,
-  placeholder,
-  q
-}) {
+export function SearchWell({ onChangeHandler, onClickHandler, searchResults, placeholder, q }) {
+  SearchWell.propTypes = {
+    q: React.PropTypes.string,
+    searchResults: React.PropTypes.array,
+    onChangeHandler: React.PropTypes.func,
+    onClickHandler: React.PropTypes.func,
+    placeholder: React.PropTypes.string
+  };
+
   return (
     <div className="well">
       <h4>Search</h4>
@@ -20,11 +22,3 @@ export function SearchWell({
     </div>
   );
 }
-
-SearchWell.propTypes = {
-  q: React.PropTypes.string,
-  searchResults: React.PropTypes.array,
-  onChangeHandler: React.PropTypes.func,
-  onClickHandler: React.PropTypes.func,
-  placeholder: React.PropTypes.string
-};

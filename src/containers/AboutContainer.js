@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import _ from "underscore";
 
 import { loadAbout } from "../actions";
-import { About, Loading } from "../components";
+import { About } from "../components";
 
 class AboutContainer extends React.Component {
   static propTypes = {
@@ -17,7 +17,7 @@ class AboutContainer extends React.Component {
   }
 
   render() {
-    return _.isEmpty(this.props.about) ? <Loading /> : <About about={this.props.about} />;
+    return _.isEmpty(this.props.about) ? <span /> : <About about={this.props.about} />;
   }
 }
 

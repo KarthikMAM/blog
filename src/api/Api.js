@@ -8,9 +8,9 @@ function getAbout() {
       .get(`${HOST}/about`)
       .set("Accept", "application/json")
       .end((err, res) => {
-        if (err || !res.ok) reject(err);
+        if (err || !res.ok) { reject([["Error", `${err.message}`]]); return; }
 
-        res = JSON.parse(res.text);
+        res = res.ok && JSON.parse(res.text);
 
         res.success ? resolve(res) : reject(res.error);
       });
@@ -24,7 +24,7 @@ function getPayload(target, query = {}) {
       .set("Accept", "application/json")
       .query(query)
       .end((err, res) => {
-        if (err || !res.ok) reject(err);
+        if (err || !res.ok) { reject([["Error", `${err.message}`]]); return; }
 
         res = res.ok && JSON.parse(res.text);
 
@@ -38,8 +38,12 @@ function getSearch(type, q) {
     request
       .get(`${HOST}/search`)
       .set("Accept", "application/json")
-      .query({ type, q })
-      .end((err, res) => res.ok ? resolve(JSON.parse(res.text)) : reject(["search", "Unable to find search query"]));
+      .query({ type: type.replace("blog", "blog_posts"), q })
+      .end((err, res) => {
+        if (err || !res.ok) { reject([["Error", `${err.message}`]]); return; }
+
+        res.ok ? resolve(JSON.parse(res.text)) : reject([["Error", "Search not available at the moment"]]);
+      });
   });
 }
 

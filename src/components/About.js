@@ -5,11 +5,25 @@ import { Social } from "./Social";
 import { ButtonWell } from "./ButtonWell";
 
 export function About({ about }) {
+  About.propTypes = {
+    about: React.PropTypes.shape({
+      name: React.PropTypes.string,
+      pic: React.PropTypes.string,
+      desc: React.PropTypes.array,
+      portfolio: React.PropTypes.array,
+      skills: React.PropTypes.array,
+      projects: React.PropTypes.array,
+      social: React.PropTypes.array
+    })
+  };
+
   return (
     <div className="row">
       <div className="col-md-8">
         <div className="center">
-          {/*<img src={about.pic} alt={about.name} className="pic" />*/}
+          <hr />
+
+          <img src={about.pic} alt={about.name} className="pic" />
 
           {about.desc.map((item, index) => <p dangerouslySetInnerHTML={{ __html: item }} key={index} />)}
 
@@ -23,6 +37,7 @@ export function About({ about }) {
       </div>
 
       <div className="col-md-4">
+        <hr />
 
         <ButtonWell buttons={about.portfolio} title="Portfolio" />
         <ButtonWell buttons={about.skills} title="Skills" />
@@ -31,18 +46,8 @@ export function About({ about }) {
           <Social items={about.social} />
         </div>
       </div>
+
+      <div className="col-md-12"><hr /></div>
     </div>
   );
 }
-
-About.propTypes = {
-  about: React.PropTypes.shape({
-    name: React.PropTypes.string,
-    pic: React.PropTypes.string,
-    desc: React.PropTypes.array,
-    portfolio: React.PropTypes.array,
-    skills: React.PropTypes.array,
-    projects: React.PropTypes.array,
-    social: React.PropTypes.array
-  })
-};
