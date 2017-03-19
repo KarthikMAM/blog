@@ -130,18 +130,16 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not update a project' do
-
-    assert_raises ArgumentError do
-      patch "/admin#{project_path(@project)}", params: {
-          project: {
-              name: '',
-              github: '',
-              content: '',
-              desc: ''
-          },
-          tags: 'Tag1,Tag2'
-      }
-    end
+    patch "/admin#{project_path(@project)}", params: {
+        project: {
+            name: '',
+            github: '',
+            content: '',
+            desc: ''
+        },
+        tags: 'Tag1,Tag2'
+    }
+    assert_redirected_to projects_path
 
     @project.reload
 

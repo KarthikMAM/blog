@@ -14,6 +14,7 @@ gem 'bootstrap-will_paginate', '0.0.10'
 gem 'faker', '1.6.6'
 gem 'redis'
 gem 'redis-namespace'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'sqlite3', '1.3.12'
@@ -25,6 +26,7 @@ group :development do
   gem 'listen', '3.0.8'
   gem 'spring', '1.7.2'
   gem 'spring-watcher-listen', '2.0.0'
+  gem 'foreman', '~> 0.82.0'
 end
 
 group :test do

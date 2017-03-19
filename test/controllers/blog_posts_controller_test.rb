@@ -103,9 +103,6 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not update a blog post' do
-
-    assert_raises ArgumentError do
-      get edit_blog_post_path(@blog_post.id)
       patch "/admin/#{blog_post_path(@blog_post)}", params: {
           blog_post: {
               title: ' ',
@@ -114,7 +111,7 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
           },
           tags: 'Tag1,Tag2'
       }
-    end
+      assert_redirected_to blog_posts_path
 
     @blog_post.reload
 

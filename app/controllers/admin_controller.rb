@@ -1,16 +1,32 @@
 class AdminController < ApplicationController
 
   def new
-
+    respond_to do |format|
+      format.html
+      format.json { render json: {
+          success: true,
+          authentication_token: form_authenticity_token
+      } }
+    end
   end
 
   def create
     if log_in(params[:user], params[:password])
-      flash.now[:success] = 'Login Successful'
-      redirect_to admin_path
+      respond_to do |format|
+        format.json { render json: {success: true} }
+        format.html {
+          flash.now[:success] = 'Login Successful'
+          redirect_to admin_path
+        }
+      end
     else
-      flash[:error] = [['Login Failed: ', 'User id / password mismatch']]
-      redirect_to login_path
+      respond_to do |format|
+        format.json { render json: {success: false, error: [['Login Failed', 'User id / password mismatch']]} }
+        format.html {
+          flash[:error] = [['Login Failed: ', 'User id / password mismatch']]
+          redirect_to login_path
+        }
+      end
     end
   end
 
