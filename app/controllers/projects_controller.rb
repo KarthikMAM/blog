@@ -2,7 +2,9 @@ class ProjectsController < ApplicationController
   before_action :requireLogIn, only: [:edit, :update, :create, :new]
 
   def index
-    @projects = Project.paginate(page: params[:page], per_page: 10)
+    @projects = Project
+                    .includes(project_tags: [:tag])
+                    .paginate(page: params[:page], per_page: 10)
   end
 
   def create
@@ -16,11 +18,21 @@ class ProjectsController < ApplicationController
             tag_id: Tag.find_by(name: tag.strip).id)
       end
 
-      flash[:success] = 'Project added successfully'
-      redirect_to @project
+      respond_to do |format|
+        format.json
+        format.html {
+          flash[:success] = 'Project added successfully'
+          redirect_to @project
+        }
+      end
     else
-      flash[:error] = @project.errors.messages
-      redirect_to new_project_path
+      respond_to do |format|
+        format.html {
+          flash[:error] = @project.errors.messages
+          redirect_back fallback_location: projects_path
+        }
+        format.json
+      end
     end
 
   end
@@ -31,14 +43,21 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.includes(project_tags: [:tag]).find_by(id: Slug[controller_name, params[:id]])
+    @project = Project
+                   .includes(project_tags: [:tag])
+                   .find_by(id: Slug[controller_name, params[:id]])
     @tags = []
 
     if @project.nil?
-      flash[:error] = [['Project', "Record #{params[:id]} not found"]]
-      redirect_to project_path
+      respond_to do |format|
+        format.html {
+          flash[:error] = [['Project', "Record #{params[:id]} not found"]]
+          redirect_to projects_path
+        }
+        format.json
+      end
     else
-      @tags = @project.project_tags.map{ |e| e.tag.name }.join(', ')
+      @tags = @project.project_tags.map { |e| e.tag.name }.join(', ')
     end
   end
 
@@ -48,8 +67,13 @@ class ProjectsController < ApplicationController
                    .find_by(id: Slug[controller_name, params[:id]])
 
     if @project.nil?
-      flash[:error] = [['Project', "Record #{params[:id]} not found"]]
-      redirect_to projects_path
+      respond_to do |format|
+        format.html {
+          flash[:error] = [['Project', "Record #{params[:id]} not found"]]
+          redirect_to projects_path
+        }
+        format.json
+      end
     end
   end
 
@@ -84,23 +108,39 @@ class ProjectsController < ApplicationController
             .destroy
       end
 
-      flash[:success] = 'Update successful'
-      redirect_to @project
+      respond_to do |format|
+        format.json
+        format.html {
+          flash[:success] = 'Update successful'
+          redirect_to @project
+        }
+      end
     else
-      flash[:error] = @project.errors.messages
-      redirect_back
+      respond_to do |format|
+        format.json
+        format.html {
+          flash[:success] = @project.errors.messages
+          redirect_to projects_path
+        }
+      end
     end
   end
 
   def tags
     @tag = CGI::unescape(params[:name])
     @projects = ProjectTag
-                    .includes(:project)
+                    .includes(project: {project_tags: [:tag]})
                     .where(tag_id: Tag.find_by(name: @tag).id)
                     .paginate(page: params[:page], per_page: 10)
   rescue
-    flash[:error] = [['Tags', "#{@tag} not found"]]
-    redirect_to projects_path
+    @projects = nil
+    respond_to do |format|
+      format.json
+      format.html {
+        flash[:error] = [['Tags', "#{@tag} not found"]]
+        redirect_to projects_path
+      }
+    end
   end
 
   private

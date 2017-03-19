@@ -2,7 +2,9 @@ class BlogPostsController < ApplicationController
   before_action :requireLogIn, only: [:edit, :update, :create, :new]
 
   def index
-    @blog_posts = BlogPost.paginate(page: params[:page], per_page: 10)
+    @blog_posts = BlogPost
+                      .includes(blog_post_tags: [:tag])
+                      .paginate(page: params[:page], per_page: 10)
   end
 
   def create
@@ -15,13 +17,22 @@ class BlogPostsController < ApplicationController
             blog_post_id: @blog_post.id,
             tag_id: Tag.find_by(name: tag.strip).id)
       end
-      Slug[controller_name, @blog_post.to_param] = @blog_post.id
 
-      flash[:success] = 'Blog Post added successfully'
-      redirect_to @blog_post
+      respond_to do |format|
+        format.json
+        format.html {
+          flash[:success] = 'Blog Post added successfully'
+          redirect_to @blog_post
+        }
+      end
     else
-      flash[:error] = @blog_post.errors.messages
-      redirect_to new_blog_post_path
+      respond_to do |format|
+        format.html {
+          flash[:error] = @blog_post.errors.messages
+          redirect_back fallback_location: blog_posts_path
+        }
+        format.json
+      end
     end
 
   end
@@ -32,14 +43,21 @@ class BlogPostsController < ApplicationController
   end
 
   def edit
-    @blog_post = BlogPost.includes(blog_post_tags: [:tag]).find_by(id: Slug[controller_name, params[:id]])
+    @blog_post = BlogPost
+                     .includes(blog_post_tags: [:tag])
+                     .find_by(id: Slug[controller_name, params[:id]])
     @tags = []
 
     if @blog_post.nil?
-      flash[:error] = [['Blog Post', "Record #{params[:id]} not found"]]
-      redirect_to blog_post_path
+      respond_to do |format|
+        format.html {
+          flash[:error] = [['Blog Post', "Record #{params[:id]} not found"]]
+          redirect_to blog_posts_path
+        }
+        format.json
+      end
     else
-      @tags = @blog_post.blog_post_tags.map{ |e| e.tag.name }.join(', ')
+      @tags = @blog_post.blog_post_tags.map { |e| e.tag.name }.join(', ')
     end
   end
 
@@ -49,8 +67,13 @@ class BlogPostsController < ApplicationController
                      .find_by(id: Slug[controller_name, params[:id]])
 
     if @blog_post.nil?
-      flash[:error] = [['Blog Post', "Record #{params[:id]} not found"]]
-      redirect_to blog_posts_path
+      respond_to do |format|
+        format.html {
+          flash[:error] = [['Blog Post', "Record #{params[:id]} not found"]]
+          redirect_to blog_posts_path
+        }
+        format.json
+      end
     end
   end
 
@@ -85,23 +108,39 @@ class BlogPostsController < ApplicationController
             .destroy
       end
 
-      flash[:success] = 'Update successful'
-      redirect_to @blog_post
+      respond_to do |format|
+        format.json
+        format.html {
+          flash[:success] = 'Update successful'
+          redirect_to @blog_post
+        }
+      end
     else
-      flash[:error] = @blog_post.errors.messages
-      redirect_back
+      respond_to do |format|
+        format.json
+        format.html {
+          flash[:success] = @blog_post.errors.messages
+          redirect_to blog_posts_path
+        }
+      end
     end
   end
 
   def tags
     @tag = CGI::unescape(params[:name])
     @blog_posts = BlogPostTag
-                      .includes(:blog_post)
+                      .includes(blog_post: {blog_post_tags: [:tag]})
                       .where(tag_id: Tag.find_by(name: @tag).id)
                       .paginate(page: params[:page], per_page: 10)
   rescue
-    flash[:error] = [['Tags', "#{@tag} not found"]]
-    redirect_to blog_posts_path
+    @blog_posts = nil
+    respond_to do |format|
+      format.json
+      format.html {
+        flash[:error] = [['Tags', "#{@tag} not found"]]
+        redirect_to blog_posts_path
+      }
+    end
   end
 
   private

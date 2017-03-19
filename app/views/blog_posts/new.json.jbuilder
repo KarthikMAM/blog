@@ -1,0 +1,2 @@
+json.authentication_token form_authenticity_token
+json.success true
