@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Header } from "./components";
+import { Header, Footer } from "./components";
 import { Status } from "./containers";
 
 export class App extends React.Component {
@@ -20,6 +20,8 @@ export class App extends React.Component {
         <div className="container">
           {this.props.children}
         </div>
+
+        {this.props.location.pathname !== "/" && <Footer />}
       </div >
     );
   }

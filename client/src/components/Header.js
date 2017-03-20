@@ -6,6 +6,12 @@ export function Header({ activePath }) {
     activePath: React.PropTypes.string
   };
 
+  let onClickHandler = () => {
+    document.querySelector(".in") &&
+      window.matchMedia("(min-width: 768px)") &&
+      document.querySelector(".navbar-toggle").click();
+  }
+
   return (
     <nav className="navbar navbar-inverse navbar-tall navbar-fixed-top" role="navigation">
       <div className="container">
@@ -18,15 +24,15 @@ export function Header({ activePath }) {
                 <span className="icon-bar"></span>
               </button>
 
-              <Link id="name" to="/" style={{ marginLeft: "0px", paddingLeft: "0px" }} className="navbar-brand">Karthik M A M</Link>
+              <Link onClick={onClickHandler} id="name" to="/" style={{ marginLeft: "0px", paddingLeft: "0px" }} data-toggle="collapse" data-target="#navigator" className="navbar-brand">Karthik M A M</Link>
             </div>
 
             <div className="collapse navbar-collapse" id="navigator">
               <ul className="nav navbar-nav navbar-right">
-                <li className={activePath === "/projects" && "active"}><Link to="/projects">Projects</Link></li>
-                <li className={activePath === "/blog" && "active"}><Link to="/blog">Blog</Link></li>
-                <li className={activePath === "/about" && "active"}><Link to="/about">About</Link></li>
-                <li className={activePath === "/contact" && "active"}><Link to="/contact">Contact</Link></li>
+                <li onClick={onClickHandler} className={activePath === "/projects" && "active"}><Link to="/projects">Projects</Link></li>
+                <li onClick={onClickHandler} className={activePath === "/blog" && "active"}><Link to="/blog">Blog</Link></li>
+                <li onClick={onClickHandler} className={activePath === "/about" && "active"}><Link to="/about">About</Link></li>
+                <li onClick={onClickHandler} className={activePath === "/contact" && "active"}><Link to="/contact">Contact</Link></li>
               </ul>
             </div>
           </div>

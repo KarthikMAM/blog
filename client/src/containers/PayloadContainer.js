@@ -25,6 +25,7 @@ class PayloadContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    document.title = `${nextProps.payloadType.charAt(0).toUpperCase() + nextProps.payloadType.slice(1)} | Karthik M A M`;
     _.isEmpty(nextProps.payload) && nextProps.loadPayload({
       payloadType: nextProps.payloadType,
       payloadSubtype: nextProps.payloadSubtype,
@@ -65,7 +66,6 @@ class PayloadContainer extends React.Component {
             buttons: payload.tags.map(tag => ({ name: unescape(tag), url: `/${this.props.payloadType}/tags/${tag}` }))
           }} />
         </div>
-        <div className="col-md-12"><hr /></div>
       </div>
     );
   }

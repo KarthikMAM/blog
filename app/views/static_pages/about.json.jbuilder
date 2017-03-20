@@ -2,7 +2,7 @@ json.success true
 json.payloadType 'about'
 json.payload ({
     name: 'Karthik M A M',
-    pic: image_url('profile'),
+    pic: image_url('profile.jpg'),
     desc: [
         'Hi, I am Karthik M A M, an undergrad computer science and engineering student based in Chennai. I currently intern at <a href="http://realimage.com/home">Real Image Media Technologies, Chennai</a>. My fields of interest are designing and building software applications, full-stack websites, services and algorithms.',
         'Most of the times I talk with computers and tell them what to do.. Ya, I code stuff most of the time either building tools, apps and websites or solving challenges on HackerRank. Well, for the rest, I would watch Anime or surf Quora, the internet or watch videos on Youtube channels like Vsauce, DNews, Techquickie, Seeker Daily etc,. I would have watched at-least 150 Anime series, some twice or even thrice. I love to taste different kinds of food and am always on the lookout for a delectable palate.'
@@ -34,12 +34,12 @@ json.payload ({
         {name: 'windows phone', url: project_tags_path('windows+phone')}
     ],
     social: [
-        {name: 'GitHub', url: 'https://github.com/KarthikMAM', logo: image_url('github')},
-        {name: 'LinkedIn', url: 'https://in.linkedin.com/in/KarthikMAM', logo: image_url('linkedin')},
-        {name: 'Quora', url: 'https://quora.com/profile/Karthik-M-A-M-1/', logo: image_url('quora')},
-        {name: 'Facebook', url: 'https://facebook.com/karthik.king.165/', logo: image_url('facebook')},
-        {name: 'Mail', url: 'mailto:karthik_m_a_m@outlook.com', logo: image_url('mail')},
-        {name: 'Twitter', url: 'https://twitter.com/Karthik_M_A_M', logo: image_url('twitter')},
-        {name: 'Google+', url: 'https://plus.google.com/+KarthikMAM', logo: image_url('google')}
+        {name: 'GitHub', url: 'https://github.com/KarthikMAM', logo: image_url('github.png')},
+        {name: 'LinkedIn', url: 'https://in.linkedin.com/in/KarthikMAM', logo: image_url('linkedin.png')},
+        {name: 'Quora', url: 'https://quora.com/profile/Karthik-M-A-M-1/', logo: image_url('quora.png')},
+        {name: 'Facebook', url: 'https://facebook.com/karthik.king.165/', logo: image_url('facebook.png')},
+        {name: 'Mail', url: 'mailto:karthik_m_a_m@outlook.com', logo: image_url('mail.png')},
+        {name: 'Twitter', url: 'https://twitter.com/Karthik_M_A_M', logo: image_url('twitter.png')},
+        {name: 'Google+', url: 'https://plus.google.com/+KarthikMAM', logo: image_url('google.png')}
     ]
 })

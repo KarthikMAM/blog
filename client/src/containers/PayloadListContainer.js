@@ -32,6 +32,7 @@ class PayloadListContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    document.title = `${nextProps.payloadType.charAt(0).toUpperCase() + nextProps.payloadType.slice(1)} | Karthik M A M`;
     _.isEmpty(nextProps.payload) && nextProps.loadPayload({
       payloadType: nextProps.payloadType,
       payloadSubtype: "pages",

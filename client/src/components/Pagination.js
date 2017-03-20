@@ -13,8 +13,8 @@ export function Pagination({ location, currentPage = 1, pageCount = 1 }) {
       <ul className="pagination">
         {
           currentPage !== 1 ?
-            <li><Link to={{ ...location, query: { page: currentPage - 1 } }}>← Previous</Link></li> :
-            <li className="disabled"><Link>← Previous</Link></li>
+            <li><Link to={{ ...location, query: { page: currentPage - 1 } }}><span className="glyphicon glyphicon-arrow-left"></span> Previous</Link></li> :
+            <li className="disabled"><Link><span className="glyphicon glyphicon-arrow-left"></span> Previous</Link></li>
         }
 
         {
@@ -27,8 +27,8 @@ export function Pagination({ location, currentPage = 1, pageCount = 1 }) {
 
         {
           currentPage !== pageCount ?
-            <li><Link to={{ ...location, query: { page: currentPage + 1 } }}>Next →</Link></li> :
-            <li className="disabled"><Link>Next →</Link></li>
+            <li><Link to={{ ...location, query: { page: currentPage + 1 } }}>Next <span className="glyphicon glyphicon-arrow-right"></span></Link></li> :
+            <li className="disabled"><Link>Next <span className="glyphicon glyphicon-arrow-right"></span></Link></li>
         }
       </ul>
     </div>

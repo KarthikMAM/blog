@@ -1,6 +1,8 @@
 class StaticPagesController < ApplicationController
+  layout "index"
+
   def home
-    render layout: false
+    render file: "public/index.html"
   end
 
   def about

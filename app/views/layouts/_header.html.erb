@@ -14,7 +14,7 @@
       <ul class="nav navbar-nav navbar-right">
         <%- %w[Projects Blog About Contact].each do |menu| %>
             <li class="<%= title[menu] == menu ? 'active' : '' %>">
-              <%= link_to menu != '#' ? menu : '', eval("#{menu.downcase}_path") %>
+              <%= link_to menu, menu.downcase %>
             </li>
         <%- end %>
       </ul>

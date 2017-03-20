@@ -53,7 +53,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create a new project' do
     assert_difference %w(Project.count ProjectTag.count) do
-      post "/admin#{projects_path}", params: {
+      post projects_path, params: {
           project: {
               name: 'Test',
               github: 'github',
@@ -72,7 +72,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     project_count = Project.count
     project_tag_count = ProjectTag.count
 
-    post "/admin#{projects_path}", params: {
+    post projects_path, params: {
         project: {
             name: '',
             github: '',
@@ -92,7 +92,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
     project_tag_count = ProjectTag.count
 
     2.times.each do |i|
-      post "/admin#{projects_path}", params: {
+      post projects_path, params: {
           project: {
               name: 'Test',
               github: 'github',
@@ -109,7 +109,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update a project' do
 
-    patch "/admin#{project_path(@project)}", params: {
+    patch project_path(@project), params: {
         project: {
             name: 'hello',
             github: 'hello',
@@ -130,7 +130,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not update a project' do
-    patch "/admin#{project_path(@project)}", params: {
+    patch project_path(@project), params: {
         project: {
             name: '',
             github: '',

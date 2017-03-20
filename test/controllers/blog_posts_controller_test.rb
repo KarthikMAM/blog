@@ -51,7 +51,7 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create a new blog post' do
     assert_difference %w(BlogPost.count BlogPostTag.count) do
-      post "/admin#{blog_posts_path}", params: {
+      post blog_posts_path, params: {
           blog_post: {
               title: 'Test',
               desc: 'TestDesc',
@@ -69,7 +69,7 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
     blog_post_count = Project.count
     blog_post_tag_count = ProjectTag.count
 
-    post "/admin#{blog_posts_path}", params: {
+    post blog_posts_path, params: {
         blog_post: {
             title: '',
             desc: '',
@@ -84,7 +84,7 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should update a blog post' do
 
-    patch "/admin/#{blog_post_path(@blog_post)}", params: {
+    patch blog_post_path(@blog_post), params: {
         blog_post: {
             title: 'hello',
             content: 'hello',
@@ -103,7 +103,7 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not update a blog post' do
-      patch "/admin/#{blog_post_path(@blog_post)}", params: {
+      patch blog_post_path(@blog_post), params: {
           blog_post: {
               title: ' ',
               content: '',

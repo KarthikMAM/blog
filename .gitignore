@@ -23,20 +23,10 @@
 # Ignore Byebug command history file.
 .byebug_history
 
-# See https://help.github.com/ignore-files/ for more about ignoring files.
+# ignore the builded files in the public folder
+public/static/*
+public/asset-manifest.json
+public/index.html
 
-# dependencies
-client/node_modules
-
-# testing
-client/coverage
-
-# production
-client/build
-
-# misc
-client/.DS_Store
-client/.env
-client/npm-debug.log*
-client/yarn-debug.log*
-client/yarn-error.log*
+# redis db dump
+dump.rdb

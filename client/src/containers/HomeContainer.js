@@ -13,6 +13,7 @@ class HomeContainer extends React.Component {
   }
 
   componentDidMount() {
+    document.title = "Home | Karthik M A M";
     _.isEmpty(this.props.about) && this.props.load();
   }
 

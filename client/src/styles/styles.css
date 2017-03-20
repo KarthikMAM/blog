@@ -3,8 +3,8 @@
   max-width: 100%;
 }
 
-body {
-  margin-top: 80;
+#root {
+  margin-top: 80px;
 }
 
 .row {

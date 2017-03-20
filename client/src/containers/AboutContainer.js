@@ -13,6 +13,7 @@ class AboutContainer extends React.Component {
   }
 
   componentDidMount() {
+    document.title = "About | Karthik M A M";
     _.isEmpty(this.props.about) && this.props.load();
   }
 

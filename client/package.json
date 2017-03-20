@@ -6,6 +6,11 @@
     "email": "karthik_m_a_m@outlook.com",
     "url": "https://karthikmam.com"
   },
+  "homepage": "https://karthikmam.com",
+  "repository": {
+    "type": "Github Repo",
+    "url": "https://github.com/KarthikMAM/blog"
+  },
   "private": true,
   "devDependencies": {
     "babel-eslint": "^7.1.1",
@@ -16,7 +21,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "jquery": "^3.2.0",
+    "jquery": "^3.2.1",
     "react": "^15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -30,7 +35,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cd .. && cp -R client/build/* public/",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
