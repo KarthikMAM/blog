@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import update from "immutability-helper";
 
 import {
   PAYLOAD_SUBTYPE_ITEMS,
@@ -12,20 +13,25 @@ import {
 function payloadSubtype(state, action, currentSubtype) {
   switch (action.payloadSubtype === currentSubtype && action.payloadSubtype) {
     case PAYLOAD_SUBTYPE_ITEMS:
-    case PAYLOAD_SUBTYPE_SEARCH: return {
-      ...state,
-      ...action.payload
-    };
-    case PAYLOAD_SUBTYPE_PAGES: return {
-      ...state,
-      ...{
-        [action.query]: {
-          ...state[action.query] ? state[action.query] : [],
-          [action.page]: action.payload,
-          pageCount: action.payloadPages
+    case PAYLOAD_SUBTYPE_SEARCH: return update(
+      state,
+      { $merge: action.payload }
+    );
+    case PAYLOAD_SUBTYPE_PAGES: return update(
+      state,
+      {
+        $merge: {
+          [action.query]: update(
+            state[action.query] ? state[action.query] : {}, {
+              $merge: {
+                [action.page]: action.payload,
+                pageCount: action.payloadPages
+              }
+            }
+          )
         }
       }
-    };
+    );
     default: return state;
   }
 }
