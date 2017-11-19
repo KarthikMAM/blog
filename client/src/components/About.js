@@ -31,7 +31,7 @@ export function About({ about }) {
 
           <div className="list-group">
             <h4 className="list-group-heading">Projects</h4>
-            {about.projects.map(item => <Link key={item.name} to={item.url} className="list-group-item">{item.name}</Link>)}
+            {about.projects.map(item => <Link key={item.name} to={item.url.replace('/api', '')} className="list-group-item">{item.name}</Link>)}
           </div>
         </div>
       </div>
