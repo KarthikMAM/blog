@@ -20,11 +20,11 @@ class PayloadContainer extends React.Component {
     payloadSubtype: "items"
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.componentWillReceiveProps(this.props);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     document.title = `${nextProps.payloadType.charAt(0).toUpperCase() + nextProps.payloadType.slice(1)} | Karthik M A M`;
     _.isEmpty(nextProps.payload) && nextProps.loadPayload({
       payloadType: nextProps.payloadType,
@@ -33,7 +33,7 @@ class PayloadContainer extends React.Component {
     });
   }
 
-  render() {
+  render () {
     let payload = this.props.payload;
 
     return _.isEmpty(payload) ? <span /> : (
@@ -56,7 +56,7 @@ class PayloadContainer extends React.Component {
             buttons: [
               { name: "GitHub", url: `https://github.com/KarthikMAM/${payload.github}` },
               { name: "Issues", url: `https://github.com/KarthikMAM/${payload.github}/issues` },
-              { name: "Release", url: `https://github.com/KarthikMAM/${payload.github}/release` },
+              { name: "Releases", url: `https://github.com/KarthikMAM/${payload.github}/releases` },
               { name: "Live", url: payload.store }
             ].filter(item => item.url && !item.url.includes("undefined"))
           }} />

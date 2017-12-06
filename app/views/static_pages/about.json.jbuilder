@@ -9,7 +9,6 @@ json.payload ({
     ],
     projects: [
         {name: 'Download Manager', url: project_item_path('download-manager')},
-        {name: 'Blog', url: project_item_path('blog')},
         {name: 'Links Grabber Extension', url: project_item_path('kissanime-download-links-grabber')},
         {name: 'Boxo the Explorer', url: project_item_path('boxo-the-explorer')},
         {name: 'Park Smart', url: project_item_path('park-smart')},
