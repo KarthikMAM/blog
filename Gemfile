@@ -15,6 +15,7 @@ gem 'faker', '1.6.6'
 gem 'redis'
 gem 'redis-namespace'
 gem 'newrelic_rpm'
+gem 'scout_apm'
 
 group :development, :test do
   gem 'sqlite3', '1.3.12'
