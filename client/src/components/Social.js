@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react'
 
-export function Social({ items }) {
+export function Social ({ items }) {
   Social.propTypes = {
     items: React.PropTypes.array
-  };
+  }
 
   return (
     <div className="nav-pills">
@@ -15,5 +15,5 @@ export function Social({ items }) {
         ))
       }
     </div>
-  );
+  )
 }

@@ -1,11 +1,11 @@
-import React from "react";
-import { connect } from "react-redux";
-import * as toastr from "toastr";
-import _ from "underscore";
-import { browserHistory } from "react-router";
-import ReactCSSTransitionGroup from "react-addons-css-transition-group";
+import React from 'react'
+import { connect } from 'react-redux'
+import * as toastr from 'toastr'
+import _ from 'underscore'
+import { browserHistory } from 'react-router'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
-import { clearError } from "../actions";
+import { clearError } from '../actions'
 
 class StatusContainer extends React.Component {
   static propTypes = {
@@ -15,27 +15,27 @@ class StatusContainer extends React.Component {
     loading: React.PropTypes.bool
   };
 
-  componentDidMount() {
-    this.componentWillReceiveProps(this.props);
+  componentDidMount () {
+    this.componentWillReceiveProps(this.props)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (!_.isEmpty(nextProps.error)) {
       setTimeout(() => browserHistory.push({
         pathname: (
-          browserHistory.getCurrentLocation().pathname.includes("/projects/") ? "/projects" :
-            browserHistory.getCurrentLocation().pathname.includes("/blog/") ? "/blog" :
-              "/"
-        )
-      }), 1000);
+    browserHistory.getCurrentLocation().pathname.includes('/projects/') ? '/projects'
+      : browserHistory.getCurrentLocation().pathname.includes('/blog/') ? '/blog'
+        : '/'
+  )
+      }), 1000)
 
-      nextProps.error.map(error => toastr.error(error.join(": ")));
+      nextProps.error.map(error => toastr.error(error.join(': ')))
 
-      nextProps.clearError();
+      nextProps.clearError()
     }
   }
 
-  render() {
+  render () {
     return (
       <div className="nanobar">
         <ReactCSSTransitionGroup
@@ -45,13 +45,13 @@ class StatusContainer extends React.Component {
           {this.props.loading && <div className="bar" />}
         </ReactCSSTransitionGroup>
       </div>
-    );
+    )
   }
 }
 
 let connector = connect(
   state => ({ error: state.error, loading: state.ajax > 0 }),
   (dispatch) => ({ clearError: () => dispatch(clearError()) })
-)(StatusContainer);
+)(StatusContainer)
 
-export { connector as StatusContainer };
+export { connector as StatusContainer }

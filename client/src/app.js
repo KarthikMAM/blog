@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
-import { Header, Footer } from "./components";
-import { Status } from "./containers";
+import { Header, Footer } from './components'
+import { Status } from './containers'
 
 export class App extends React.Component {
   static propTypes = {
@@ -10,19 +10,19 @@ export class App extends React.Component {
     params: React.PropTypes.object
   };
 
-  render() {
+  render () {
     return (
       <div>
         <Status />
 
-        {this.props.location.pathname !== "/" && <Header activePath={this.props.location.pathname} />}
+        {this.props.location.pathname !== '/' && <Header activePath={this.props.location.pathname} />}
 
         <div className="container">
           {this.props.children}
         </div>
 
-        {this.props.location.pathname !== "/" && <Footer />}
+        {this.props.location.pathname !== '/' && <Footer />}
       </div >
-    );
+    )
   }
 }

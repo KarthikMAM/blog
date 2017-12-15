@@ -1,13 +1,13 @@
-import React from "react";
-import { Link } from "react-router";
+import React from 'react'
+import { Link } from 'react-router'
 
-export function PayloadContent({ title, createdAt, desc, content }) {
+export function PayloadContent ({ title, createdAt, desc, content }) {
   PayloadContent.propTypes = {
     title: React.PropTypes.string,
     createdAt: React.PropTypes.string,
     desc: React.PropTypes.string,
     content: React.PropTypes.string
-  };
+  }
 
   return (
     <div>
@@ -15,7 +15,7 @@ export function PayloadContent({ title, createdAt, desc, content }) {
         <h1> {title} </h1>
         <p className="lead"> by <Link to="/">Karthik M A M</Link></p>
       </div>
-      <p><span className="glyphicon glyphicon-time"></span>{" " + createdAt}</p>
+      <p><span className="glyphicon glyphicon-time"></span>{' ' + createdAt}</p>
       <hr />
       <div className="content">
         <div>
@@ -25,5 +25,5 @@ export function PayloadContent({ title, createdAt, desc, content }) {
         <div dangerouslySetInnerHTML={{ __html: content }} />
       </div>
     </div>
-  );
+  )
 }

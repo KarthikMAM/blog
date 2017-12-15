@@ -1,11 +1,11 @@
-import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import _ from "underscore";
+import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import _ from 'underscore'
 
-import { PayloadListItem, Pagination } from "../components";
-import { SearchContainer } from "./SearchContainer";
-import { loadPayload } from "../actions";
+import { PayloadListItem, Pagination } from '../components'
+import { SearchContainer } from './SearchContainer'
+import { loadPayload } from '../actions'
 
 class PayloadListContainer extends React.Component {
   static propTypes = {
@@ -23,25 +23,25 @@ class PayloadListContainer extends React.Component {
     page: 1
   }
 
-  componentDidMount() {
-    this.componentWillReceiveProps(this.props);
+  componentDidMount () {
+    this.componentWillReceiveProps(this.props)
   }
 
-  shouldComponentUpdate(nextProps) {
-    return !_.isEmpty(nextProps.payload);
+  shouldComponentUpdate (nextProps) {
+    return !_.isEmpty(nextProps.payload)
   }
 
-  componentWillReceiveProps(nextProps) {
-    document.title = `${nextProps.payloadType.charAt(0).toUpperCase() + nextProps.payloadType.slice(1)} | Karthik M A M`;
+  componentWillReceiveProps (nextProps) {
+    document.title = `${nextProps.payloadType.charAt(0).toUpperCase() + nextProps.payloadType.slice(1)} | Karthik M A M`
     _.isEmpty(nextProps.payload) && nextProps.loadPayload({
       payloadType: nextProps.payloadType,
-      payloadSubtype: "pages",
-      query: nextProps.query || "index",
+      payloadSubtype: 'pages',
+      query: nextProps.query || 'index',
       page: nextProps.page
-    });
+    })
   }
 
-  render() {
+  render () {
     return _.isEmpty(this.props.payload) ? <span /> : (
       <div className="row">
         <div className="col-md-8">
@@ -49,8 +49,8 @@ class PayloadListContainer extends React.Component {
             {[
               this.props.payloadType,
               this.props.payloadSubtype,
-              unescape(this.props.query).replace("-", " ")
-            ].filter(item => item !== "undefined").join(" - ").toUpperCase()}
+              unescape(this.props.query).replace('-', ' ')
+            ].filter(item => item !== 'undefined').join(' - ').toUpperCase()}
           </h3>
 
           <Pagination {...{
@@ -64,7 +64,7 @@ class PayloadListContainer extends React.Component {
               {
                 this.props.payload.map(payloadItem => <PayloadListItem key={payloadItem.slug} {...{
                   name: payloadItem.name,
-                  showPath: payloadItem.links.path.replace("/api", ""),
+                  showPath: payloadItem.links.path.replace('/api', ''),
                   editPath: payloadItem.links.edit,
                   createdAt: payloadItem.createdAt,
                   desc: payloadItem.desc
@@ -85,7 +85,7 @@ class PayloadListContainer extends React.Component {
           <SearchContainer payloadType={this.props.payloadType} />
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -93,20 +93,20 @@ let connector = connect(
   (state, ownProps) => ({
     payload: (
       state[ownProps.payloadType] &&
-      state[ownProps.payloadType]["pages"][ownProps.query || "index"] &&
-      state[ownProps.payloadType]["pages"][ownProps.query || "index"][ownProps.page] &&
+      state[ownProps.payloadType]['pages'][ownProps.query || 'index'] &&
+      state[ownProps.payloadType]['pages'][ownProps.query || 'index'][ownProps.page] &&
       _.filter(
-        state[ownProps.payloadType]["items"],
-        (item) => state[ownProps.payloadType]["pages"][ownProps.query || "index"][ownProps.page].includes(item.slug)
+        state[ownProps.payloadType]['items'],
+        (item) => state[ownProps.payloadType]['pages'][ownProps.query || 'index'][ownProps.page].includes(item.slug)
       )
     ),
     payloadPageCount: parseInt(
       state[ownProps.payloadType] &&
-      state[ownProps.payloadType]["pages"][ownProps.query || "index"] &&
-      state[ownProps.payloadType]["pages"][ownProps.query || "index"].pageCount, 10
+      state[ownProps.payloadType]['pages'][ownProps.query || 'index'] &&
+      state[ownProps.payloadType]['pages'][ownProps.query || 'index'].pageCount, 10
     )
   }),
   dispatch => ({ loadPayload: bindActionCreators(loadPayload, dispatch) })
-)(PayloadListContainer);
+)(PayloadListContainer)
 
-export { connector as PayloadListContainer };
+export { connector as PayloadListContainer }

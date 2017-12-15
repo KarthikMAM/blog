@@ -1,11 +1,11 @@
-import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import _ from "underscore";
+import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import _ from 'underscore'
 
-import { PayloadContent, ButtonWell } from "../components";
-import { SearchContainer } from "./SearchContainer";
-import { loadPayload } from "../actions";
+import { PayloadContent, ButtonWell } from '../components'
+import { SearchContainer } from './SearchContainer'
+import { loadPayload } from '../actions'
 
 class PayloadContainer extends React.Component {
   static propTypes = {
@@ -17,24 +17,24 @@ class PayloadContainer extends React.Component {
   }
 
   static defaultProps = {
-    payloadSubtype: "items"
+    payloadSubtype: 'items'
   }
 
   componentDidMount () {
-    this.componentWillReceiveProps(this.props);
+    this.componentWillReceiveProps(this.props)
   }
 
   componentWillReceiveProps (nextProps) {
-    document.title = `${nextProps.payloadType.charAt(0).toUpperCase() + nextProps.payloadType.slice(1)} | Karthik M A M`;
+    document.title = `${nextProps.payloadType.charAt(0).toUpperCase() + nextProps.payloadType.slice(1)} | Karthik M A M`
     _.isEmpty(nextProps.payload) && nextProps.loadPayload({
       payloadType: nextProps.payloadType,
       payloadSubtype: nextProps.payloadSubtype,
       query: nextProps.query
-    });
+    })
   }
 
   render () {
-    let payload = this.props.payload;
+    let payload = this.props.payload
 
     return _.isEmpty(payload) ? <span /> : (
       <div className="row">
@@ -52,32 +52,32 @@ class PayloadContainer extends React.Component {
           <SearchContainer payloadType={this.props.payloadType} />
 
           <ButtonWell {...{
-            title: "Links",
+            title: 'Links',
             buttons: [
-              { name: "GitHub", url: `https://github.com/KarthikMAM/${payload.github}` },
-              { name: "Issues", url: `https://github.com/KarthikMAM/${payload.github}/issues` },
-              { name: "Releases", url: `https://github.com/KarthikMAM/${payload.github}/releases` },
-              { name: "Live", url: payload.store }
-            ].filter(item => item.url && !item.url.includes("undefined"))
+              { name: 'GitHub', url: `https://github.com/KarthikMAM/${payload.github}` },
+              { name: 'Issues', url: `https://github.com/KarthikMAM/${payload.github}/issues` },
+              { name: 'Releases', url: `https://github.com/KarthikMAM/${payload.github}/releases` },
+              { name: 'Live', url: payload.store }
+            ].filter(item => item.url && !item.url.includes('undefined'))
           }} />
 
           <ButtonWell {...{
-            title: "Tags",
+            title: 'Tags',
             buttons: payload.tags.map(tag => ({ name: unescape(tag), url: `/${this.props.payloadType}/tags/${tag}` }))
           }} />
         </div>
       </div>
-    );
+    )
   }
 }
 
 let connector = connect(
   (state, ownProps) => ({
     payload: state[ownProps.payloadType] &&
-    state[ownProps.payloadType]["items"] &&
-    state[ownProps.payloadType]["items"][ownProps.query]
+    state[ownProps.payloadType]['items'] &&
+    state[ownProps.payloadType]['items'][ownProps.query]
   }),
   dispatch => ({ loadPayload: bindActionCreators(loadPayload, dispatch) })
-)(PayloadContainer);
+)(PayloadContainer)
 
-export { connector as PayloadContainer };
+export { connector as PayloadContainer }

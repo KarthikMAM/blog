@@ -1,10 +1,10 @@
-import React from "react";
-import { Link } from "react-router";
+import React from 'react'
+import { Link } from 'react-router'
 
-import { Social } from "./Social";
-import { ButtonWell } from "./ButtonWell";
+import { Social } from './Social'
+import { ButtonWell } from './ButtonWell'
 
-export function About({ about }) {
+export function About ({ about }) {
   About.propTypes = {
     about: React.PropTypes.shape({
       name: React.PropTypes.string,
@@ -15,7 +15,7 @@ export function About({ about }) {
       projects: React.PropTypes.array,
       social: React.PropTypes.array
     })
-  };
+  }
 
   return (
     <div className="row">
@@ -49,5 +49,5 @@ export function About({ about }) {
 
       <div className="col-md-12"><hr /></div>
     </div>
-  );
+  )
 }

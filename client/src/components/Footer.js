@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-export function Footer() {
+export function Footer () {
   return (
     <footer>
       <div className="container">
@@ -12,5 +12,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  );
+  )
 }
