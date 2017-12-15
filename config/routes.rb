@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   # get 'home', to: 'static_pages#home'
   # get 'projects', to: 'projects#index'
@@ -10,13 +12,13 @@ Rails.application.routes.draw do
   # get 'projects/tags/:name', to: 'projects#tags'
   # resources :projects, only: [:show, :index]
   scope 'admin' do
-    resources :projects, only: [:show, :index, :update, :edit, :new, :create]
+    resources :projects, only: %i[show index update edit new create]
   end
 
   # get 'blog/posts/tags/:name', to: 'blog_posts#tags'
   # resources :blog_posts, only: [:show, :index], path: '/blog/posts'
   scope 'admin' do
-    resources :blog_posts, only: [:show, :index, :update, :edit, :new, :create], path: '/blog/posts'
+    resources :blog_posts, only: %i[show index update edit new create], path: '/blog/posts'
   end
 
   get 'login', to: 'admin#new', as: 'login'
@@ -26,22 +28,22 @@ Rails.application.routes.draw do
 
   # get 'search', to: 'search#query', as: 'search_path'
 
-  #paths for api calls from front-end
+  # paths for api calls from front-end
   scope 'api' do
     get 'about', to: 'static_pages#about'
 
     get 'projects/tags/:name/(:page)', to: 'projects#tags', as: :project_tags
     get 'projects/items/:id', to: 'projects#show', as: :project_item
     get 'projects/index/(:page)', to: 'projects#index'
-    scope 'admin' do 
-      resources :projects, only: [:update, :edit, :new, :create], as: :project_item
+    scope 'admin' do
+      resources :projects, only: %i[update edit new create], as: :project_item
     end
 
     get 'blog/tags/:name/(:page)', to: 'blog_posts#tags', as: :blog_post_tags
     get 'blog/items/:id', to: 'blog_posts#show', as: :blog_item
     get 'blog/index/(:page)', to: 'blog_posts#index'
-    scope 'admin' do 
-      resources :blog_posts, only: [:update, :edit, :new, :create], as: :blog_post_item
+    scope 'admin' do
+      resources :blog_posts, only: %i[update edit new create], as: :blog_post_item
     end
 
     get 'search', to: 'search#query'

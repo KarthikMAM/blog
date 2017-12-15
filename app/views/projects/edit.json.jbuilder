@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 if @project.nil?
   json.success false
   json.error [['Projects', "Project #{params[:id]} not found"]]

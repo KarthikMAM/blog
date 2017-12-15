@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -8,20 +10,20 @@
 
 99.times do |n|
   name = Faker::Name.name
-  github = "example-#{n+1}"
-  desc = Faker::Lorem.sentence(word_count = 5)
-  content = '<p>' + Faker::Lorem.paragraphs(paragraph_count = 5).join("</p>  <p>") + '</p>'
+  github = "example-#{n + 1}"
+  desc = Faker::Lorem.sentence(5)
+  content = '<p>' + Faker::Lorem.paragraphs(5).join('</p>  <p>') + '</p>'
 
   Project.create!(
-      name: name,
-      github: github,
-      desc: desc,
-      content: content
+    name:    name,
+    github:  github,
+    desc:    desc,
+    content: content
   )
 
   BlogPost.create!(
-      title: name,
-      desc: desc,
-      content: content
+    title:   name,
+    desc:    desc,
+    content: content
   )
 end

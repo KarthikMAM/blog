@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 if @blog_post.nil?
   json.success false
   json.error [['Blog Posts', "Blog post #{params[:id]} not found"]]

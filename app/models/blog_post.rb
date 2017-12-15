@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BlogPost < ApplicationRecord
   validates :title,
             presence: true
@@ -6,7 +8,7 @@ class BlogPost < ApplicationRecord
             presence: true
 
   validates :desc,
-            length: {maximum: 256},
+            length:   { maximum: 256 },
             presence: true
 
   def name
@@ -17,10 +19,9 @@ class BlogPost < ApplicationRecord
     title.parameterize
   end
 
-
-  after_save {
+  after_save do
     Slug['blog_posts', to_param] = id
-  }
+  end
 
   has_many :blog_post_tags, dependent: :destroy
   default_scope -> { order(updated_at: :desc) }

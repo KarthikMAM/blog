@@ -1,4 +1,6 @@
-if @projects.length > 0
+# frozen_string_literal: true
+
+if !@projects.empty?
   json.payloadType 'projects'
   json.payload convert_projects_to_json(@projects)
   json.success true

@@ -1,15 +1,13 @@
+# frozen_string_literal: true
+
 class StaticPagesController < ApplicationController
-  layout "index"
+  layout 'index'
 
   def home
-    render file: "public/index.html"
+    render file: 'public/index.html'
   end
 
-  def about
+  def about; end
 
-  end
-
-  def contact
-
-  end
+  def contact; end
 end

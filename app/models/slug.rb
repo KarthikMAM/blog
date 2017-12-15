@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Slug
   class << self
     def [](type, slug)
@@ -7,7 +9,7 @@ class Slug
       $redis.hget(type, slug)
     end
 
-    def []= (type, slug, id)
+    def []=(type, slug, id)
       type = type.parameterize
       slug = slug.parameterize
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,44 +12,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170124043105) do
-
-  create_table "blog_post_tags", force: :cascade do |t|
-    t.integer "blog_post_id"
-    t.integer "tag_id"
-    t.index ["blog_post_id"], name: "index_blog_post_tags_on_blog_post_id"
-    t.index ["tag_id"], name: "index_blog_post_tags_on_tag_id"
+ActiveRecord::Schema.define(version: 20_170_124_043_105) do
+  create_table 'blog_post_tags', force: :cascade do |t|
+    t.integer 'blog_post_id'
+    t.integer 'tag_id'
+    t.index ['blog_post_id'], name: 'index_blog_post_tags_on_blog_post_id'
+    t.index ['tag_id'], name: 'index_blog_post_tags_on_tag_id'
   end
 
-  create_table "blog_posts", force: :cascade do |t|
-    t.string   "title"
-    t.text     "desc"
-    t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["title"], name: "index_blog_posts_on_title"
+  create_table 'blog_posts', force: :cascade do |t|
+    t.string   'title'
+    t.text     'desc'
+    t.text     'content'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['title'], name: 'index_blog_posts_on_title'
   end
 
-  create_table "project_tags", force: :cascade do |t|
-    t.integer "project_id"
-    t.integer "tag_id"
-    t.index ["project_id"], name: "index_project_tags_on_project_id"
-    t.index ["tag_id"], name: "index_project_tags_on_tag_id"
+  create_table 'project_tags', force: :cascade do |t|
+    t.integer 'project_id'
+    t.integer 'tag_id'
+    t.index ['project_id'], name: 'index_project_tags_on_project_id'
+    t.index ['tag_id'], name: 'index_project_tags_on_tag_id'
   end
 
-  create_table "projects", force: :cascade do |t|
-    t.string   "name"
-    t.string   "github"
-    t.string   "store"
-    t.text     "desc"
-    t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'projects', force: :cascade do |t|
+    t.string   'name'
+    t.string   'github'
+    t.string   'store'
+    t.text     'desc'
+    t.text     'content'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "tags", force: :cascade do |t|
-    t.string "name"
-    t.index ["name"], name: "index_tags_on_name"
+  create_table 'tags', force: :cascade do |t|
+    t.string 'name'
+    t.index ['name'], name: 'index_tags_on_name'
   end
-
 end

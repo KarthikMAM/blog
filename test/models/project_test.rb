@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class ProjectTest < ActiveSupport::TestCase
@@ -41,7 +43,7 @@ class ProjectTest < ActiveSupport::TestCase
 
   test 'github should be valid' do
     %w[HelloWorld Hello hello
-        hello-world Hello-World-Welcome A ].each do |github|
+       hello-world Hello-World-Welcome A ].each do |github|
       @project.github = github
       assert @project.valid?, "#{github} should be valid"
     end

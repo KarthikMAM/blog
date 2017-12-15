@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 require 'digest'
 
 module AdminHelper
-
   def remember
     token = Digest::SHA1.hexdigest(SecureRandom.urlsafe_base64)
     $redis.set('token', token)
     cookies.permanent.signed[:token] = token
-    #session[:token] = token
+    # session[:token] = token
   end
 
   def log_in(user, password)
@@ -22,12 +23,12 @@ module AdminHelper
 
   def logged_in?
     cookies.signed[:token] && cookies.signed[:token] == $redis.get('token')
-    #session[:token] && session[:token] == $redis.get('token')
+    # session[:token] && session[:token] == $redis.get('token')
   end
 
   def requireLogIn
     unless logged_in?
-      raise ActionController::RoutingError.new ("No route matches [GET] '#{request.original_fullpath}'")
+      raise ActionController::RoutingError, "No route matches [GET] '#{request.original_fullpath}'"
     end
   end
 

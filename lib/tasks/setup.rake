@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'digest'
 
 namespace :setup do
@@ -13,7 +15,7 @@ namespace :setup do
 
   task search: :environment do
     Tag.all.each do |tag|
-      $redis.sadd("search-tags-#{tag.name[0]}", CGI::escape(tag.name))
+      $redis.sadd("search-tags-#{tag.name[0]}", CGI.escape(tag.name))
     end
 
     $redis.hgetall('projects').each do |project_slug, _|

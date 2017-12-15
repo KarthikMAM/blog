@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 require 'digest'
 
 class BlogPostsControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @default_title = "Karthik M A M"
+    @default_title = 'Karthik M A M'
 
     @blog_post = BlogPost.create(
-        title: 'hello',
-        content: 'world',
-        desc: 'world'
+      title:   'hello',
+      content: 'world',
+      desc:    'world'
     )
     @fake_post = BlogPost.new
     Slug['blog_posts', @blog_post.to_param] = @blog_post.id
@@ -24,40 +26,40 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
 
   test 'should get blog posts' do
     get blog_posts_path
-    assert_select 'head title', {count: 1, text: "Blog Posts | #{@default_title}"}
-    assert_select 'div.alert', {count: 0}
+    assert_select 'head title', count: 1, text: "Blog Posts | #{@default_title}"
+    assert_select 'div.alert', count: 0
   end
 
   test 'should get blog post' do
     get blog_post_path(@blog_post)
     assert_response :success
     assert_template 'shared/_content'
-    assert_select 'div.alert', {count: 0}
+    assert_select 'div.alert', count: 0
   end
 
   test 'should get new blog post page' do
     get new_blog_post_path
     assert_response :success
     assert_template 'shared/_form'
-    assert_select 'div.alert', {count: 0}
+    assert_select 'div.alert', count: 0
   end
 
   test 'should get edit blog post page' do
     get edit_blog_post_path(@blog_post)
     assert_response :success
     assert_template 'shared/_form'
-    assert_select 'div.alert', {count: 0}
+    assert_select 'div.alert', count: 0
   end
 
   test 'should create a new blog post' do
-    assert_difference %w(BlogPost.count BlogPostTag.count) do
+    assert_difference %w[BlogPost.count BlogPostTag.count] do
       post blog_posts_path, params: {
-          blog_post: {
-              title: 'Test',
-              desc: 'TestDesc',
-              content: 'Test Content'
-          },
-          tags: 'Tag1'
+        blog_post: {
+          title:   'Test',
+          desc:    'TestDesc',
+          content: 'Test Content'
+        },
+        tags:      'Tag1'
       }
     end
 
@@ -65,17 +67,16 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not create a new blog post' do
-
     blog_post_count = Project.count
     blog_post_tag_count = ProjectTag.count
 
     post blog_posts_path, params: {
-        blog_post: {
-            title: '',
-            desc: '',
-            content: ''
-        },
-        tags: 'Tag1'
+      blog_post: {
+        title:   '',
+        desc:    '',
+        content: ''
+      },
+      tags:      'Tag1'
     }
 
     assert_equal blog_post_count, BlogPostTag.count
@@ -83,14 +84,13 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update a blog post' do
-
     patch blog_post_path(@blog_post), params: {
-        blog_post: {
-            title: 'hello',
-            content: 'hello',
-            desc: 'hello'
-        },
-        tags: 'Tag1'
+      blog_post: {
+        title:   'hello',
+        content: 'hello',
+        desc:    'hello'
+      },
+      tags:      'Tag1'
     }
 
     @blog_post.reload
@@ -103,15 +103,15 @@ class BlogPostsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should not update a blog post' do
-      patch blog_post_path(@blog_post), params: {
-          blog_post: {
-              title: ' ',
-              content: '',
-              desc: ' '
-          },
-          tags: 'Tag1,Tag2'
-      }
-      assert_redirected_to blog_posts_path
+    patch blog_post_path(@blog_post), params: {
+      blog_post: {
+        title:   ' ',
+        content: '',
+        desc:    ' '
+      },
+      tags:      'Tag1,Tag2'
+    }
+    assert_redirected_to blog_posts_path
 
     @blog_post.reload
 

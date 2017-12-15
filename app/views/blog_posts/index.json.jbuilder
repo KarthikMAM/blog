@@ -1,4 +1,6 @@
-if @blog_posts.length > 0
+# frozen_string_literal: true
+
+if !@blog_posts.empty?
   json.payloadType 'blog'
   json.payload convert_blog_posts_to_json(@blog_posts)
   json.success true

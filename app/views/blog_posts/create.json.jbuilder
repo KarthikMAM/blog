@@ -1,4 +1,6 @@
-if not @blog_post.id.nil?
+# frozen_string_literal: true
+
+if !@blog_post.id.nil?
   json.payloadType 'blog'
   json.payload convert_blog_posts_to_json([@blog_post])
   json.success true
