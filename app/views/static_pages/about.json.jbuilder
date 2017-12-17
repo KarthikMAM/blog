@@ -2,7 +2,7 @@
 
 json.success true
 json.payloadType 'about'
-json.payload ({
+json.payload(
   name: 'Karthik M A M',
   pic: image_url('profile.jpg'),
   desc: [
@@ -43,4 +43,4 @@ json.payload ({
     { name: 'Twitter', url: 'https://twitter.com/Karthik_M_A_M', logo: image_url('twitter.png') },
     { name: 'Google+', url: 'https://plus.google.com/+KarthikMAM', logo: image_url('google.png') }
   ]
-})
+)
