@@ -38,7 +38,7 @@ json.payload(
     { name: 'GitHub', url: 'https://github.com/KarthikMAM', logo: image_url('github.png') },
     { name: 'LinkedIn', url: 'https://in.linkedin.com/in/KarthikMAM', logo: image_url('linkedin.png') },
     { name: 'Quora', url: 'https://quora.com/profile/Karthik-M-A-M-1/', logo: image_url('quora.png') },
-    { name: 'Facebook', url: 'https://facebook.com/karthik.king.165/', logo: image_url('facebook.png') },
+    { name: 'Facebook', url: 'https://facebook.com/karthik.m.a.m.1996/', logo: image_url('facebook.png') },
     { name: 'Mail', url: 'mailto:karthik_m_a_m@outlook.com', logo: image_url('mail.png') },
     { name: 'Twitter', url: 'https://twitter.com/Karthik_M_A_M', logo: image_url('twitter.png') },
     { name: 'Google+', url: 'https://plus.google.com/+KarthikMAM', logo: image_url('google.png') }
